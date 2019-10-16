@@ -1,2 +1,2 @@
 # capsule
-Create a reproducible R environment and inject code into it
+Create a reproducible R package environment and run code within it.
