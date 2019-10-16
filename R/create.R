@@ -9,7 +9,7 @@ create <- function(dep_source_paths = "./packages.R") {
                 library = renv::paths$library())
 
   renv::snapshot(type = "simple",
-                 library = c(renv::paths$library(), system_library()),
+                 library = c(renv::paths$library(), system_libraries()),
                  confirm = FALSE,
                  force = TRUE)
 }
