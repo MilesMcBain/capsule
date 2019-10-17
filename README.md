@@ -77,8 +77,9 @@ processes_, use `run_callr()` for things that don't and should to avoid
 contamination with your dev global environment.
 
 So what about code that you've just been handed? It has a `renv.lock` but no
-local library? How do you build the library to run the code? You don't! `run()` and `run_callr()` will check to
-see if a local library exists and build it if needs to. 
+local library? How do you build the library to run the code? You don't! `run()`
+and `run_callr()` will check to see if a local library exists and build it if
+required.
 
 ## `recreate()` the capsule
 
