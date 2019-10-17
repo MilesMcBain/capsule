@@ -11,7 +11,7 @@
 ##' @export
 reproduce_lib <- function() {
 
-  if(dir.exists(renv::paths$library()) stop("[capsule] I found a capsule library. Try creating the library first.R")
+  if (dir.exists(renv::paths$library())) stop("[capsule] I found a capsule library. Try creating the library first.R")
 
   callr::r(function(){
     renv::init(bare = TRUE)
