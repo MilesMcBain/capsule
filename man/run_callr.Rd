@@ -9,32 +9,32 @@ run_callr(func, ...)
 \arguments{
 \item{func}{a function to run in the capsule context}
 
-\item{...}{additional arguments passed to `callr::r()`}
+\item{...}{additional arguments passed to \code{callr::r()}}
 }
 \value{
-output of `func`
+output of \code{func}
 }
 \description{
 run function in a new process in the capsule
 }
 \details{
 Execute the supplied function in the context of the capsule library using
-`callr::r`. This ensures code is run in a new R process that will not be
+\code{callr::r}. This ensures code is run in a new R process that will not be
 contaminated by the state of the interactive development environment.
 }
 \section{Lockfile}{
 
-At a minimum, an `renv` lockfile must be present in the current working
-  directory. The capsule library will be generated from the lockfile if it
-  does not exist. Use `create()` to make the lockfile.
+At a minimum, an \code{renv} lockfile must be present in the current working
+directory. The capsule library will be generated from the lockfile if it
+does not exist. Use \code{create()} to make the lockfile.
 }
 
 \examples{
 run_callr(function() {library()})
 }
 \seealso{
-[callr::r()] for detailed calling semantics, [create()] to make the
-  lockfile. [run()] for a lighter weight alternative.
+\code{\link[callr:r]{callr::r()}} for detailed calling semantics, \code{\link[=create]{create()}} to make the
+lockfile. \code{\link[=run]{run()}} for a lighter weight alternative.
 }
 \author{
 Miles McBain

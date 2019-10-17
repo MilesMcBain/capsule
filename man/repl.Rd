@@ -13,7 +13,7 @@ nothing.
 Open a REPL within the capsule
 }
 \details{
-Uses an experimental feature from `callr` to attach a new process repl to
+Uses an experimental feature from \code{callr} to attach a new process repl to
 your current interactive session. That REPL evaluates code within the
 context of your capsule.
 

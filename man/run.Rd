@@ -10,7 +10,7 @@ run(code)
 \item{code}{an expression to run in the context of the capsule library.}
 }
 \value{
-output of `code`
+output of \code{code}
 }
 \description{
 run code in the context of the capsule
@@ -19,17 +19,17 @@ run code in the context of the capsule
 Execute the supplied function in the context of the capsule library, by
 changing the R library paths it searches.
 
-For code that creates its own process like `knitr::knit()`,
-`drake::r_make()`, `rmarkdown::render()` this is safe, but be wary using it
+For code that creates its own process like \code{knitr::knit()},
+\code{drake::r_make()}, \code{rmarkdown::render()} this is safe, but be wary using it
 on arbitrary code as the global package environment can be irreversibly
 contaminated due to code that has run earlier in the session. Use
-[run_callr()] if in doubt.
+\code{\link[=run_callr]{run_callr()}} if in doubt.
 }
 \section{Lockfile}{
 
-At a minimum, an `renv` lockfile must be present in the current working
-  directory. The capsule library will be generated from the lockfile if it
-  does not exist. Use `create()` to make the lockfile.
+At a minimum, an \code{renv} lockfile must be present in the current working
+directory. The capsule library will be generated from the lockfile if it
+does not exist. Use \code{create()} to make the lockfile.
 }
 
 \examples{
@@ -37,7 +37,7 @@ run(library())
 run(search())
 }
 \seealso{
-[create()] to make the lockfile. [run_callr()] for a safer version.
+\code{\link[=create]{create()}} to make the lockfile. \code{\link[=run_callr]{run_callr()}} for a safer version.
 }
 \author{
 Miles McBain

@@ -17,7 +17,7 @@ This helper is provided to help you recover from mistakes or test building
 the library from a lockfile you have generated.
 }
 \seealso{
-[delete()]
+\code{\link[=delete]{delete()}}
 }
 \author{
 Miles McBain

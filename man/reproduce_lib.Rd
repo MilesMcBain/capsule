@@ -14,9 +14,9 @@ Reproduce the capsule library from the lockfile
 }
 \details{
 If you have cloned a project that contains a lockfile you can actually just
-  use `run()` to execute commands in the capsule and have the library built
-  automatically. If that is not convenient, this will explicitly create the
-  capsule library from the lockfile.
+use \code{run()} to execute commands in the capsule and have the library built
+automatically. If that is not convenient, this will explicitly create the
+capsule library from the lockfile.
 }
 \author{
 Miles McBain

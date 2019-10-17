@@ -17,7 +17,7 @@ Create a capsule library context to run code in
 }
 \details{
 Dependencies to be encapsulated are detected from files you nominate in
-`dep_source_paths`. Good practice would be to have a single dependencies R
+\code{dep_source_paths}. Good practice would be to have a single dependencies R
 file that contains all library() calls - hence this makes an explicit
 assertion of your dependencies. This way spurious usages of pkg:: for
 packages not stated as dependencies will cause errors that can be caught.

@@ -21,12 +21,12 @@ After some development work has been completed, Use this function to update the
 capsule environment to match the dependency versions in your development
 environment.
 
-Similarly to `create()`, you are expected to supply a vector of files in
+Similarly to \code{create()}, you are expected to supply a vector of files in
 your project to extract dependencies from. Things work best when this is a
 single file containing only dependency related code.
 }
 \seealso{
-[create()]
+\code{\link[=create]{create()}}
 }
 \author{
 Miles McBain
