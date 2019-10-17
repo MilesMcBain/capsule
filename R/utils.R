@@ -8,6 +8,7 @@ system_libraries <- function() {
 
 delete_uneeded <- function() {
 
+  unlink("./.Rbuildignore")
   unlink("./renv/activate.R")
   unlink("./renv/settings.dcf")
 
