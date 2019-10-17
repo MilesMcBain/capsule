@@ -1,6 +1,9 @@
+
 # capsule
 
-A minimal driver for `renv` that reduces the overhead of reproducible R package libraries.
+  [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+
+# Overview
 
 A `capsule` is a stable local package library that you consciously choose to execute code within. Think of it as representing 'production', while your normal interactive R session represents 'development'.
 
@@ -43,7 +46,7 @@ You supply a vector of file paths to extract dependencies from. The default is
 `"./packages.R"`. These dependencies are copied from your regular (dev) library
 to your local capsule.
 
-Notice how this is easier when you keep your library calls all in one place? ;
+Notice how this is easier when you keep your library calls all in one place? :wink:
 
 You'll notice some things created in your project folder. Assuming you have the
 project under version control... you definitely want to commit the `./renv.lock`
@@ -96,7 +99,7 @@ REPL being overtaken. In ESS I loose my autocompletions.
 
 * `capsule::delete()` - remove the local library and lockfile.
 * `capsule::delete_local_lib()` - remove the local library.
-* `capsule::delete_lockfile` - remove the lockfile.
+* `capsule::delete_lockfile()` - remove the lockfile.
 * `capsule::reproduce_lib()` - build the local library from the lockfile. 
 
 ### It's an `renv` in the end
