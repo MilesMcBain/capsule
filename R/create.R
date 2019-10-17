@@ -3,6 +3,7 @@ create <- function(dep_source_paths = "./packages.R") {
   callr::r(function(){
     renv::init(bare = TRUE)
     renv::deactivate()
+    delete_uneeded()
   })
 
   renv::hydrate(renv::dependencies(dep_source_paths)$Package,
@@ -12,4 +13,5 @@ create <- function(dep_source_paths = "./packages.R") {
                  library = c(renv::paths$library(), system_libraries()),
                  confirm = FALSE,
                  force = TRUE)
+
 }

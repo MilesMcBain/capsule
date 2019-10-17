@@ -5,3 +5,10 @@ system_libraries <- function() {
               )
 
 }
+
+delete_uneeded <- function() {
+
+  unlink("./renv/activate.R")
+  unlink("./renv/settings.dcf")
+
+}
