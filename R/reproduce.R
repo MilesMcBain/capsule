@@ -1,4 +1,4 @@
-reproduce <- function() {
+reproduce_lib <- function() {
 
   callr::r(function(){
     renv::init(bare = TRUE)
