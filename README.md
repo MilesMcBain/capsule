@@ -101,11 +101,11 @@ installed in your dev environment using `recreate()`.
 Try `capsule::repl()` to attach a REPL for a new R process in the context of the
 capsule. This is handy for interactive work like debugging. The tradeoff here is
 that depending what editor you use strange behaviour may be induced by the outer
-REPL being overtaken. In ESS I loose my autocompletions.
+REPL being overtaken. In ESS I lose my autocompletions.
 
 ### Helpers
 
-* `capsule::delete()` - remove the local library and lockfile.
+* `capsule::delete()` - remove the capsule (local library and lockfile).
 * `capsule::delete_local_lib()` - remove the local library.
 * `capsule::delete_lockfile()` - remove the lockfile.
 * `capsule::reproduce_lib()` - build the local library from the lockfile. 
