@@ -10,6 +10,7 @@
 ##' @param dep_source_paths files to find package dependencies in.
 ##' @return nothing. Creates a capsule as a side effect.
 ##' @author Miles McBain
+##' @export
 create <- function(dep_source_paths = "./packages.R") {
 
   callr::r(function(){
