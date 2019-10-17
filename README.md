@@ -5,11 +5,18 @@
 
 # Overview
 
-A `capsule` is a stable local package library that you consciously choose to execute code within. Think of it as representing 'production', while your normal interactive R session represents 'development'.
+A `capsule` is a stable project-specific R package library that you consciously
+choose to execute code within. Think of it as representing 'production', while
+your normal interactive R session represents 'development'.
 
-You develop interactively in a dynamic package environment. You run code for real in a well-defined environment capsule. Periodically you'll want to have your development environment reflected in the capsule as new stuff is integrated.
+You develop interactively in a dynamic package environment. You run code for
+real in a well-defined static capsule. Periodically you'll want to have
+your development environment reflected in the capsule as new stuff is
+integrated.
 
-When sharing with others, a capsule is the fallback that ensures your code can always be run, no matter what issues appear in your collaborator's dev environment.
+When sharing with others, a capsule is the fallback that ensures your code can
+always be run, no matter what issues appear in your collaborator's development
+environment.
 
 # Usage
 
@@ -50,31 +57,31 @@ Notice how this is easier when you keep your library calls all in one place? :wi
 
 You'll notice some things created in your project folder. Assuming you have the
 project under version control... you definitely want to commit the `./renv.lock`
-file. This will allow someone else to `run()` code against the capsule.
+file. This will allow someone else to `run()` code in the capsule context.
 
 ## `run()` code in the capsule
 
 Render a document in the capsule:
 
-```
+```r
 capsule::run(rmarkdown::render("doc/analysis.Rmd"))
 ```
 
 Run your `drake` plan in the capsule:
 
-```
+```r
 capsule::run(drake::r_make())
 ```
 
 Source and run a file in the capsule:
 
-```
+```r
 capsule::run_callr(function() source("./main.R"))
 ```
 
 Why `run_callr` vs `run`? Use `run` for things that _already create their own R
-processes_, use `run_callr()` for things that don't and should to avoid
-contamination with your dev global environment.
+processes_, use `run_callr()` for things that don't to avoid
+contamination with your dev global environment. You could always use `run_callr()` if in doubt.
 
 So what about code that you've just been handed? It has a `renv.lock` but no
 local library? How do you build the library to run the code? You don't! `run()`
