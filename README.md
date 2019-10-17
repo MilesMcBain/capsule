@@ -14,7 +14,7 @@ There are 3 functions you need to know about to use `capsule`: `capsule::create(
 
 ## `create()` a capsule for my pipeline
 
-```
+```r
 > capsule::create("./packages.R")
 Finding R package dependencies ... Done!
 * Discovering package dependencies ... Done!

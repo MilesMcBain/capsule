@@ -1,14 +1,14 @@
 Package: capsule
-Title: What the Package Does (One Line, Title Case)
+Title: A streamlined inversion of `renv` 
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Miles",
+           family = "McBsin",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: What license it uses
+           email = "miles.mcbain@gmail.com",
+           comment = c(ORCID = "0000-0003-2865-2548"))
+Description: A `capsule` is a stable local package library that you consciously choose to execute code within. Think of it as representing 'production', while your normal interactive R session represents 'development'.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
