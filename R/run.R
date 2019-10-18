@@ -27,7 +27,7 @@ run_callr <- function(func, ...) {
 
   reproduce_lib_if_not_present()
   callr::r(func = func,
-           libpath = c(renv::paths$library(), system_libraries()),
+           libpath = c(renv::paths$library()),
            ...)
 
 }
