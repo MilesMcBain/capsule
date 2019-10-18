@@ -31,6 +31,9 @@ does not exist. Use \code{create()} to make the lockfile.
 
 \examples{
 run_callr(function() {library()})
+/dontrun{
+run_callr(function() rmarkdown::render("./analysis.Rmd"))
+}
 }
 \seealso{
 \code{\link[callr:r]{callr::r()}} for detailed calling semantics, \code{\link[=create]{create()}} to make the

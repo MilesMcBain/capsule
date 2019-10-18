@@ -20,6 +20,9 @@
 ##' @export
 ##' @examples
 ##' run_callr(function() {library()})
+##' /dontrun{
+##' run_callr(function() rmarkdown::render("./analysis.Rmd"))
+##' }
 run_callr <- function(func, ...) {
 
   reproduce_lib_if_not_present()
@@ -33,11 +36,14 @@ run_callr <- function(func, ...) {
 ##' Execute the supplied function in the context of the capsule library, by
 ##' changing the R library paths it searches.
 ##'
-##' For code that creates its own process like `knitr::knit()`,
-##' `drake::r_make()`, `rmarkdown::render()` this is safe, but be wary using it
+##' For code that creates its own process like
+##' `drake::r_make()`this is safe, but be wary using it
 ##' on arbitrary code as the global package environment can be irreversibly
 ##' contaminated due to code that has run earlier in the session. Use
 ##' [run_callr()] if in doubt.
+##'
+##' Note: `rmarkdown::render()` and `knitr::knit()` do not create new processes
+##' and so should be called with run_callr()
 ##'
 ##' @inheritSection run_callr Lockfile
 ##'

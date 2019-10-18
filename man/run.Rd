@@ -19,11 +19,14 @@ run code in the context of the capsule
 Execute the supplied function in the context of the capsule library, by
 changing the R library paths it searches.
 
-For code that creates its own process like \code{knitr::knit()},
-\code{drake::r_make()}, \code{rmarkdown::render()} this is safe, but be wary using it
+For code that creates its own process like
+\code{drake::r_make()}this is safe, but be wary using it
 on arbitrary code as the global package environment can be irreversibly
 contaminated due to code that has run earlier in the session. Use
 \code{\link[=run_callr]{run_callr()}} if in doubt.
+
+Note: \code{rmarkdown::render()} and \code{knitr::knit()} do not create new processes
+and so should be called with run_callr()
 }
 \section{Lockfile}{
 
