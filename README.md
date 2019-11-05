@@ -64,7 +64,7 @@ file. This will allow someone else to `run()` code in the capsule context.
 Render a document in the capsule:
 
 ```r
-capsule::run(rmarkdown::render("doc/analysis.Rmd"))
+capsule::run_callr(function() rmarkdown::render("doc/analysis.Rmd"))
 ```
 
 Run your `drake` plan in the capsule:
