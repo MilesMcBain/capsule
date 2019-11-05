@@ -17,6 +17,7 @@ reproduce_lib <- function() {
     renv::init(bare = TRUE)
     renv::deactivate()
   })
+  delete_unneeded()
   renv::restore(project = getwd(),
                 library = renv::paths$library(),
                 confirm = FALSE)

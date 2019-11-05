@@ -6,7 +6,7 @@ system_libraries <- function() {
 
 }
 
-delete_uneeded <- function() {
+delete_unneeded <- function() {
 
   unlink("./.Rbuildignore")
   unlink("./renv/activate.R")
