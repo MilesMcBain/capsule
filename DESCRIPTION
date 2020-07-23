@@ -14,8 +14,10 @@ LazyData: true
 Imports: 
     callr,
     renv (>= 0.7.0.125),
-    withr
-Remotes: 
-    rstudio/renv
+    withr,
+    using (>= 0.4.0)
+Remotes:  
+    rstudio/renv,
+    anthonynorth/using
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
