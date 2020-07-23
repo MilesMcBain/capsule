@@ -19,7 +19,7 @@ create <- function(dep_source_paths = "./packages.R") {
   })
 
   delete_unneeded()
-  renv::hydrate(renv::dependencies(dep_source_paths)$Package,
+  renv::hydrate(detect_dependencies(dep_source_paths),
                 library = renv::paths$library())
 
   renv::snapshot(type = "simple",
