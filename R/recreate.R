@@ -18,6 +18,6 @@
 recreate <- function(dep_source_paths) {
 
   delete()
-  create(dep_source_paths = "./packages.R")
+  create(dep_source_paths = dep_source_paths)
 
 }
