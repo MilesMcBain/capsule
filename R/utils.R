@@ -13,3 +13,7 @@ delete_unneeded <- function() {
   unlink("./renv/settings.dcf")
 
 }
+
+`%||%` <- function(lhs, rhs) {
+  if (is.null(lhs)) rhs else lhs
+}
