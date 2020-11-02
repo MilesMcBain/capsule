@@ -16,8 +16,8 @@ Imports:
     renv (>= 0.7.0.125),
     withr,
     using (>= 0.4.0)
-Remotes:  
+Remotes: 
     rstudio/renv,
     anthonynorth/using
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)

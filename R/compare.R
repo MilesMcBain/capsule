@@ -1,5 +1,30 @@
+#' get packckes behind capsule
+#'
+#' Check versions of packages referred to in your project's `dep_source_paths`
+#' and identify and in your main R library that are behind the capsule
+#' renv.lock at `lockfile_path`.
+#'
+#' Information is returned about packages that are behind in your development
+#' environment, so you can update them to the capsule versions if you wish.
+#'
+#' A warning is thrown in the case that pacakges have the same version but
+#' different remote SHA. E.g. A package in one library is from GitHub and in
+#' the other library is from CRAN. Or Both packages are from GitHub, have the
+#' same version but different SHAs.
+#' @param dep_source_paths a character vector of file paths to extract
+#'     package dependencies from.
+#' @param lockfile_path a length one character vector path of the lockfile for
+#      the capsule.
+#'
+#' @return RETURN_DESCRIPTION
+#' @examples
+#' get_pkg_behind_capsule(
+#'     dep_source_paths = "./packages.R",
+#'     lockfile_path = "./renv.lock"
+#' )
+#' @export
 get_pkg_behind_capsule <- function(dep_source_paths = "./packages.R",
-                                  lockfile_path = "./renv.lock") {
+                                   lockfile_path = "./renv.lock") {
     package_data <- compare_dev_capsule(dep_source_paths, lockfile_path)
 
     behind <-
@@ -7,18 +32,23 @@ get_pkg_behind_capsule <- function(dep_source_paths = "./packages.R",
             package_data,
             function(...) {
                 data_row <- list(...)
-                version_comp <- compareVersion(data_row$version_cap, data_row$version_rlib)
+                version_comp <- compareVersion(
+                    data_row$version_cap,
+                    data_row$version_rlib
+                )
 
-                # catch edge case with git remotes not updating version and warn.
-                # if the versions are equal but:
+                # catch edge case with git remotes not updating version and
+                # warn if the versions are equal but:
                 # * one has a remote sha and one does not -
                 #   i.e. one is from CRAN and one is from GitHub
                 # * both have remote shas and they are not equal
                 if (version_comp == 0 &&
-                    (!is.na(data_row$remote_sha_cap) || !is.na(data_row$remote_sha_rlib)) &&
+                    (!is.na(data_row$remote_sha_cap) ||
+                        !is.na(data_row$remote_sha_rlib)) &&
                     !isTRUE(data_row$remote_sha_cap == data_row$remote_sha_rlib)) {
                     warning(
-                        "Packages have equal versions but different remote SHAs: ",
+                        "Packages have equal versions but different",
+                        " remote SHAs: ",
                         data_row$name
                     )
                 }
@@ -32,12 +62,25 @@ get_pkg_behind_capsule <- function(dep_source_paths = "./packages.R",
     package_data[behind, ]
 }
 
-any_pkg_behind_capsule <- function(dep_source_paths = "./packages.R", 
-    lockfile_path = "./renv.lock") {
-        nrow(get_pkg_behind_capsule(dep_source_paths, lockfile_path)) > 0
-    }
 
-compare_dev_capsule <- function(dep_source_paths = "./packages.R", lockfile_path = "./renv.lock") {
+#' check if any packages are behind capsule
+#'
+#' A wrapper for [get_pkg_behind_capsule] that returns TRUE if any
+#' dependencies found in `dep_source_paths` are behind the lockfile version in
+#' `lockfile_path`
+#' 
+#' @inheritParams get_pkg_behind_capsule
+#'
+#' @return TRUE if dev packages are behind capsule, FALSE otherwise.
+#' @examples
+#' # ADD_EXAMPLES_HERE
+any_pkg_behind_capsule <- function(dep_source_paths = "./packages.R",
+                                   lockfile_path = "./renv.lock") {
+    nrow(get_pkg_behind_capsule(dep_source_paths, lockfile_path)) > 0
+}
+
+compare_dev_capsule <- function(dep_source_paths = "./packages.R",
+                                lockfile_path = "./renv.lock") {
     dep_list <- detect_dependencies(dep_source_paths)
 
     lockfile_deps <- get_lockfile_deps(dep_list, lockfile_path)
@@ -95,7 +138,8 @@ get_local_deps <- function(dep_list) {
                         data.frame(
                             name = lib_data$Package,
                             version = lib_data$Version,
-                            repository = lib_data$Repository %||% lib_data$RemoteHost %||% NA,
+                            repository = lib_data$Repository %||%
+                              lib_data$RemoteHost %||% NA,
                             remote_sha = lib_data$RemoteSha %||% NA,
                             remote_repo = lib_data$RemoteRepo %||% NA,
                             remote_username = lib_data$RemoteUsername %||% NA
@@ -118,15 +162,13 @@ get_local_deps <- function(dep_list) {
 
 # dev stuff
 function() {
-
-
     dep_source_paths <- "../../repos/Camp_Hill_station_replacement/packages.R"
     lockfile_path <- "../../repos/Camp_Hill_station_replacement/renv.lock"
 
     get_pkg_behind_capsule(dep_source_paths, lockfile_path)
-   
+
     any_pkg_behind_capsule(dep_source_paths, lockfile_path)
-    
+
     find.package("qfesdata")
 
     desc_file <- read.dcf(file.path(
