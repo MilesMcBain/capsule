@@ -41,6 +41,10 @@ does not exist. Use \code{create()} to make the lockfile.
 \examples{
 run(library())
 run(search())
+ capsule::run({
+   search()
+   message("hello")
+ })
 }
 \seealso{
 \code{\link[=create]{create()}} to make the lockfile. \code{\link[=run_callr]{run_callr()}} and \code{\link[=run]{run()}} for safer versions.

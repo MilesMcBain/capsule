@@ -79,9 +79,10 @@ Source and run a file in the capsule:
 capsule::run_callr(function() source("./main.R"))
 ```
 
-Why `run_callr` vs `run`? Use `run` for things that _already create their own R
-processes_, use `run_callr()` for things that don't to avoid
-contamination with your dev global environment. You could always use `run_callr()` if in doubt.
+`run_callr()` is a more transparent interface to `callr` than `run` that does
+not use Non-standard evaluation. At this point `run` is fairly stable, but
+you can fallback to `run_callr` if you are worried about NSE issues with
+expressions that use NSE or manipulate themselves.
 
 So what about code that you've just been handed? It has a `renv.lock` but no
 local library? How do you build the library to run the code? You don't! `run()`
@@ -101,7 +102,18 @@ installed in your dev environment using `recreate()`.
 Try `capsule::repl()` to attach a REPL for a new R process in the context of the
 capsule. This is handy for interactive work like debugging. The tradeoff here is
 that depending what editor you use strange behaviour may be induced by the outer
-REPL being overtaken. In ESS I lose my autocompletions.
+REPL being overtaken. In ESS I lose my autocompletions. This may also interfere with plotting in RStudio, in which case you can run `x11()` to create a new plotting window that will work with the REPL.
+
+### Debugging interactively in same session
+
+You also have `capsule::run_session` which will run an expression in the capsule in the current session, allowing `recover`, `debugonce`, `browser` etc to work normally. This is done by hot-swapping the library paths in your session (AKA hacking them). So use `run_session` in a fresh R session and restart the R session after interactive debugging is complete. 
+
+If you do not restart your session, any packages attached prior to the
+`run_session` being run will be attached from the main R library - not the
+capsule. Keep in mind, even after restart packages can be attached by code in
+your .Rprofile!
+
+This approach is a bit of a foot gun. It may be removed in future.
 
 ### Helpers
 

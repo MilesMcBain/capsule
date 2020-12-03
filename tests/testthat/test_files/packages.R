@@ -1,0 +1,26 @@
+## library() calls go here
+library(conflicted)
+library(dotenv)
+library(drake)
+library(rmarkdown)
+
+using::pkg(qfes, "0.1.1")
+library(qfesdata)
+library(qfesutils)
+library(sf)
+library(h3jsr)
+library(tidyverse)
+library(janitor)
+library(lubridate)
+library(mapdeck)
+library(htmlwidgets)
+library(scales)
+library(knitr)
+library(kableExtra)
+library(plotly)
+library(htmltools)
+
+
+conflict_prefer("filter", "dplyr")
+conflict_prefer("mode", "qfesutils")
+conflict_prefer("qfes_query", "qfesdata")
