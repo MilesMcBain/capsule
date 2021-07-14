@@ -15,7 +15,7 @@
 ##' @author Miles McBain
 ##' @seealso [create()]
 ##' @export
-recreate <- function(dep_source_paths) {
+recreate <- function(dep_source_paths = "./packages.R") {
 
   delete()
   create(dep_source_paths = dep_source_paths)
