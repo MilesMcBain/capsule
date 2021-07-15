@@ -103,6 +103,19 @@ capsule. This is handy for interactive work like debugging. The tradeoff here is
 that depending what editor you use strange behaviour may be induced by the outer
 REPL being overtaken. In ESS I lose my autocompletions.
 
+### Automating lockfile creation with `capshot()`
+
+`capshot()` is designed to create a lockfile for your
+project very quickly so that it can be integrated into your build or rendering
+pipeline. On my [`{tflow}`](https://github.com/milesmcbain/tflow) laden with
+dependencies it typically takes 1-2 seconds to detect the dependencies and
+write the lockfile.
+
+Unlike `create()` it does not populate a local library automatically. See:
+
+* `capsule::capshot()` - fast lockfile creation
+* `capsule::capshot_sr()` - quickly generate the lockfile json for further processing, e.g. embedding in a document.
+
 ### Helpers
 
 * `capsule::delete()` - remove the capsule (local library and lockfile).

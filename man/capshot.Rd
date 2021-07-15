@@ -18,7 +18,7 @@ capshot_str(dep_source_paths = "./packages.R", minify = FALSE)
 
 \item{lockfile_path}{output path for the lock file.}
 
-\item{minify}{a boolean value indicicating is lockfile JSON should have whitespace removed to shrink footprint.}
+\item{minify}{a boolean value indicicating if lockfile JSON should have whitespace removed to shrink footprint.}
 }
 \value{
 Nothing. Writes lockfile as a side effect.

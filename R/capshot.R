@@ -34,7 +34,7 @@ BASE_PACKAGES <-
 #'
 #' @param dep_source_paths files to scan for project dependencies to write to the lock file.
 #' @param lockfile_path output path for the lock file.
-#' @param minify a boolean value indicicating is lockfile JSON should have whitespace removed to shrink footprint.
+#' @param minify a boolean value indicicating if lockfile JSON should have whitespace removed to shrink footprint.
 #'
 #' @return Nothing. Writes lockfile as a side effect.
 #' @export

@@ -4,7 +4,7 @@
 \alias{recreate}
 \title{recreate}
 \usage{
-recreate(dep_source_paths)
+recreate(dep_source_paths = "./packages.R")
 }
 \arguments{
 \item{dep_source_paths}{a character vector of project source files to
