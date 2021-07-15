@@ -53,7 +53,8 @@ capshot <- function(
 #' @export
 capshot_str <- function(dep_source_paths = "./packages.R", minify = FALSE) {
   generate_lockfile_json(
-    get_project_deps(detect_dependencies(dep_source_paths))
+    get_project_deps(detect_dependencies(dep_source_paths)),
+    minify = minify
   )
 }
 
