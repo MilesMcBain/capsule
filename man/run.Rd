@@ -46,7 +46,7 @@ arise due to non-standard evaluation, prefer \code{run_callr}.
 }
 
 \examples{
-/dontrun{
+\dontrun{
 run_callr(function() {library(tidyverse)})
 run(library(tidyverse))
 By default rmarkdown::render looks into the .GlobalEnv:

@@ -1,6 +1,6 @@
 Package: capsule
 Title: A streamlined inversion of `renv` 
-Version: 0.2.1.9000
+Version: 0.3.0.9000
 Authors@R: 
     person(given = "Miles",
            family = "McBain",
@@ -15,7 +15,12 @@ Imports:
     callr,
     renv (>= 0.7.0.125),
     withr,
-    using (>= 0.4.0)
+    using (>= 0.4.0),
+    purrr,
+    fs,
+    jsonlite,
+    stats,
+    utils
 Remotes: 
     rstudio/renv,
     anthonynorth/using

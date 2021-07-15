@@ -29,7 +29,7 @@
 ##'   lockfile. [run()] for a lighter weight alternative.
 ##' @export
 ##' @examples
-##' /dontrun{
+##' \dontrun{
 ##' run_callr(function() {library(tidyverse)})
 ##' run(library(tidyverse))
 ##' By default rmarkdown::render looks into the .GlobalEnv:
@@ -85,12 +85,14 @@ run <- function(code) {
 ##' @seealso [create()] to make the lockfile. [run_callr()] and [run()] for safer versions.
 ##' @export
 ##' @examples
+##' \dontrun{
 ##' run(library())
 ##' run(search())
 ##'  capsule::run({
 ##'    search()
 ##'    message("hello")
 ##'  })
+##' }
 run_session <- function(code) {
 
   reproduce_lib_if_not_present()
