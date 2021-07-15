@@ -114,7 +114,7 @@ write the lockfile.
 Unlike `create()` it does not populate a local library automatically. See:
 
 * `capsule::capshot()` - fast lockfile creation
-* `capsule::capshot_sr()` - quickly generate the lockfile json for further processing, e.g. embedding in a document.
+* `capsule::capshot_str()` - quickly generate the lockfile json for further processing, e.g. embedding in a document.
 
 ### Helpers
 
