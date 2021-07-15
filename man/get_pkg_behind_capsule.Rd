@@ -33,8 +33,10 @@ the other library is from CRAN. Or Both packages are from GitHub, have the
 same version but different SHAs.
 }
 \examples{
+\dontrun{
 get_pkg_behind_capsule(
-    dep_source_paths = "./packages.R",
-    lockfile_path = "./renv.lock"
+  dep_source_paths = "./packages.R",
+  lockfile_path = "./renv.lock"
 )
+}
 }

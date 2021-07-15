@@ -18,10 +18,12 @@
 #'
 #' @return RETURN_DESCRIPTION
 #' @examples
+#' \dontrun{
 #' get_pkg_behind_capsule(
 #'   dep_source_paths = "./packages.R",
 #'   lockfile_path = "./renv.lock"
 #' )
+#' }
 #' @export
 get_pkg_behind_capsule <- function(
   dep_source_paths = "./packages.R",
@@ -35,7 +37,7 @@ get_pkg_behind_capsule <- function(
       package_data,
       function(...) {
         data_row <- list(...)
-        version_comp <- compareVersion(
+        version_comp <- utils::compareVersion(
           data_row$version_cap,
           data_row$version_rlib
         )
