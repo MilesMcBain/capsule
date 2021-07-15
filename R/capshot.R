@@ -53,7 +53,7 @@ BASE_PACKAGES <-
 #' @param lockfile_path output path for the lock file.
 #' @param minify a boolean value indicicating if lockfile JSON should have whitespace removed to shrink footprint.
 #'
-#' @return Nothing. Writes lockfile as a side effect.
+#' @return `lockfile_path`. Writes lockfile as a side effect.
 #' @export
 capshot <- function(
   dep_source_paths = "./packages.R",
@@ -63,6 +63,7 @@ capshot <- function(
 
   lockfile_json <- capshot_str(dep_source_paths, minify)
   writeLines(lockfile_json, lockfile_path)
+  invisible(lockfile_path)
 }
 
 
@@ -195,7 +196,7 @@ get_repos <- function() {
 
 # Test code
 function() {
-  system.time(
-    capshot("../coolburn_dashboard/packages.R", lockfile_path = "capsule.lock")
-  )
+  lockfile <-
+    capshot("../coolburn_dashboard/packages.R", lockfile_path = "renv.lock", minify = TRUE)
+  lockfile
 }
