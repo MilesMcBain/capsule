@@ -166,6 +166,7 @@ get_renv_fields <- function(dcf_record) {
     "Package",
     "Version",
     "Repository",
+    "OS_type",
     colnames(dcf_record_df)[grepl("^Remote", colnames(dcf_record_df))]
   )
   as.list(dcf_record_df[, intersect(renv_fields, colnames(dcf_record_df))])
@@ -197,7 +198,4 @@ function() {
   system.time(
     capshot("../coolburn_dashboard/packages.R", lockfile_path = "capsule.lock")
   )
-  deps <- get_project_deps(detect_dependencies("../coolburn_dashboard/packages.R"))
-  length(deps)
-  capsule::recreate("../coolburn_dashboard/packages.R")
 }
