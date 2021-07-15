@@ -1,23 +1,40 @@
 globalVariables("BASE_PACKAGES")
 
 BASE_PACKAGES <-
-  c(
-    "base",
-    "compiler",
-    "datasets",
-    "graphics",
-    "grDevices",
-    "grid",
-    "methods",
-    "parallel",
-    "splines",
-    "stats",
-    "stats4",
-    "tcltk",
-    "tools",
-    "utils"
-  )
-
+  c("class",
+  "coxme",
+  "KernSmooth",
+  "MASS",
+  "base",
+  "boot",
+  "class",
+  "cluster",
+  "codetools",
+  "compiler",
+  "datasets",
+  "foreign",
+  "graphics",
+  "grDevices",
+  "grid",
+  "KernSmooth",
+  "lattice",
+  "MASS",
+  "Matrix",
+  "methods",
+  "mgcv",
+  "nlme",
+  "nnet",
+  "parallel",
+  "rpart",
+  "spatial",
+  "splines",
+  "stats",
+  "stats4",
+  "survival",
+  "tcltk",
+  "tools",
+  "utils")
+ 
 #' Quickly generate an renv compliant lock file
 #'
 #' These functions generate json lockfiles that can be restored from using
@@ -178,6 +195,9 @@ get_repos <- function() {
 # Test code
 function() {
   system.time(
-    capshot("../coolburn_dashboard/packages.R", minify = TRUE)
+    capshot("../coolburn_dashboard/packages.R", lockfile_path = "capsule.lock")
   )
+  deps <- get_project_deps(detect_dependencies("../coolburn_dashboard/packages.R"))
+  length(deps)
+  capsule::recreate("../coolburn_dashboard/packages.R")
 }
