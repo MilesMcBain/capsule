@@ -107,7 +107,7 @@ REPL being overtaken. In ESS I lose my autocompletions.
 
 `capshot()` is designed to create a lockfile for your
 project very quickly so that it can be integrated into your build or rendering
-pipeline. On my [`{tflow}`](https://github.com/milesmcbain/tflow) laden with
+pipeline. On my [`{tflow}`](https://github.com/milesmcbain/tflow) projects laden with
 dependencies it typically takes 1-2 seconds to detect the dependencies and
 write the lockfile.
 
