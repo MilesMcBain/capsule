@@ -113,7 +113,7 @@ get_deps <- function(
 generate_lockfile_json <- function(project_dep_dcfs, minify = FALSE) {
   is_base <- names(project_dep_dcfs) %in% BASE_PACKAGES
   project_dep_dcfs <- project_dep_dcfs[!is_base]
-  pkg_renv_entries <- lapply(project_dep_dcfs, get_renv_fields_df)
+  pkg_renv_entries <- lapply(project_dep_dcfs, get_renv_fields)
   r_renv_entry <- get_renv_r_entry()
   jsonlite::toJSON(
     list(
@@ -125,7 +125,10 @@ generate_lockfile_json <- function(project_dep_dcfs, minify = FALSE) {
   )
 }
 
-get_renv_fields_df <- function(dcf_record) {
+# This implementation tries to follow logic in 
+# renv:::renv_snapshot_description_source
+# https://github.com/rstudio/renv/blob/master/R/snapshot.R
+get_renv_fields <- function(dcf_record) {
   dcf_record_df <- as.data.frame(dcf_record)
   if (!is.null(dcf_record_df$RemoteType)) {
     dcf_record_df$Source <- renv:::renv_alias(dcf_record_df$RemoteType)
@@ -175,6 +178,6 @@ get_repos <- function() {
 # Test code
 function() {
   system.time(
-    capshot("../coolburn_dashboard/packages.R")
+    capshot("../coolburn_dashboard/packages.R", minify = TRUE)
   )
 }
