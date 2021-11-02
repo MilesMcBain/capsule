@@ -1,9 +1,10 @@
-#' get packckes behind capsule
+#' get packckes behind lockfile
 #'
-#' Check versions of packages referred to in your project's `dep_source_paths`
-#' and identify and in your main R library that are behind the capsule
+#' return information on packages in your main R library that are behind the capsule
 #' renv.lock at `lockfile_path`.
 #'
+#' if `dep_source_paths` is supplied only dependencies declared in these files are returned.
+#' 
 #' Information is returned about packages that are behind in your development
 #' environment, so you can update them to the capsule versions if you wish.
 #'
@@ -11,8 +12,9 @@
 #' different remote SHA. E.g. A package in one library is from GitHub and in
 #' the other library is from CRAN. Or Both packages are from GitHub, have the
 #' same version but different SHAs.
+#' 
 #' @param dep_source_paths a character vector of file paths to extract
-#'     package dependencies from.
+#'     package dependencies from. If NULL (default) the whole local library is compared.
 #' @param lockfile_path a length one character vector path of the lockfile for
 #      the capsule.
 #'
@@ -25,12 +27,20 @@
 #' )
 #' }
 #' @export
-get_pkg_behind_capsule <- function(
-  dep_source_paths = "./packages.R",
-  lockfile_path = "./renv.lock"
+get_pkg_behind_lockfile <- function(
+  lockfile_path = "./renv.lock",
+  dep_source_paths = NULL
 ) {
-  assert_files_exist(dep_source_paths, lockfile_path)
-  package_data <- compare_dev_capsule(dep_source_paths, lockfile_path)
+  assert_files_exist(lockfile_path)
+  package_data <- compare_dev_capsule(lockfile_path)
+
+  if (!is.null(dep_source_paths)) {
+    assert_files_exist(dep_source_paths)
+    declared_dependencies <-
+      detect_dependencies(dep_source_paths)
+    package_data <-
+      package_data[package_data$name %in% declared_dependencies, ]
+  }
 
   behind <-
     purrr::pmap_lgl(
@@ -54,7 +64,8 @@ get_pkg_behind_capsule <- function(
           warning(
             "Packages have equal versions but different",
             " remote SHAs: ",
-            data_row$name
+            data_row$name,
+            call. = FALSE
           )
         }
 
@@ -76,26 +87,26 @@ get_pkg_behind_capsule <- function(
 #'
 #' @inheritParams get_pkg_behind_capsule
 #'
-#' @return TRUE if dev packages are behind capsule, FALSE otherwise.
+#' @return TRUE if dev packages are behind lockfile, FALSE otherwise.
 #' @examples
 #' # ADD_EXAMPLES_HERE
-any_pkg_behind_capsule <- function(
-  dep_source_paths = "./packages.R",
-  lockfile_path = "./renv.lock"
+any_pkg_behind_lockfile <- function(
+  lockfile_path = "./renv.lock",
+  dep_source_paths = NULL
 ) {
-  nrow(get_pkg_behind_capsule(dep_source_paths, lockfile_path)) > 0
+  nrow(get_pkg_behind_lockfile(lockfile_path, dep_source_paths)) > 0
 }
 
 assert_not_behind_lockfile <- function(
-  dep_source_paths = "./packages.R",
   lockfile_path = "./renv.lock",
+  dep_source_paths = NULL,
   stop_on_behind = FALSE
 ) {
   if (!file.exists(lockfile_path)) {
     warning("No renv.lock found in this project.")
     return(FALSE)
   }
-  packages_behind_lockfile <- get_pkg_behind_capsule(dep_source_paths, lockfile_path)
+  packages_behind_lockfile <- get_pkg_behind_lockfile(lockfile_path, dep_source_paths)
   if (nrow(packages_behind_lockfile) == 0) {
     message("No installed packages are behind renv.lock")
   } else {
@@ -108,38 +119,32 @@ assert_not_behind_lockfile <- function(
 
 }
 
-compare_dev_capsule <- function(
-  dep_source_paths = "./packages.R",
+
+#' compare the local R library with the lockfile 
+#' 
+#' Get a summary dataframe comparing package versions in the lockfile with
+#' versions in the local R library (.libPaths()).
+#'
+#' @inheritParams get_pkg_behind_capsule
+#' @return a summary dataframe of version differences
+#' 
+#' @examples
+#' # ADD_EXAMPLES_HERE
+compare_local_lockfile <- function(
   lockfile_path = "./renv.lock"
 ) {
-  dep_list <- detect_dependencies(dep_source_paths)
+  lockfile_deps <- get_lockfile_deps(lockfile_path)
 
-  lockfile_deps <- get_lockfile_deps(dep_list, lockfile_path)
-
-  local_deps <- get_local_deps(dep_list)
+  local_deps <- get_local_deps(lockfile_deps$name)
 
   merge(lockfile_deps, local_deps, by = "name", suffixes = c("_cap", "_rlib"))
 }
 
-get_lockfile_deps <- function(dep_list, lockfile_path) {
+get_lockfile_deps <- function(lockfile_path) {
   lockfile <- jsonlite::read_json(lockfile_path)
 
-  lockfile_package_names <- purrr::map_chr(lockfile$Packages, "Package")
-
-  packages_not_in_lock <- setdiff(dep_list, lockfile_package_names)
-
-  if (length(packages_not_in_lock) > 0) {
-    warning(
-      "Packages are called in source, ",
-      "but not menitoned in the lock file: ",
-      paste(packages_not_in_lock)
-    )
-  }
-
   lockfile_deps <- purrr::map_dfr(
-    lockfile$Packages[
-      intersect(dep_list, lockfile_package_names)
-    ],
+    lockfile$Packages[],
     function(pkgdata) {
       data.frame(
         name = pkgdata$Package %||% NA,
@@ -197,9 +202,9 @@ function() {
   dep_source_paths <- "../../repos/Camp_Hill_station_replacement/packages.R"
   lockfile_path <- "../../repos/Camp_Hill_station_replacement/renv.lock"
 
-  get_pkg_behind_capsule(dep_source_paths, lockfile_path)
+  get_pkg_behind_lockfile(lockfile_path)
 
-  any_pkg_behind_capsule(dep_source_paths, lockfile_path)
+  any_pkg_behind_lockfile(lockfile_path, dep_source_paths)
 
   find.package("qfesdata")
 
