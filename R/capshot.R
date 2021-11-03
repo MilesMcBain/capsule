@@ -34,7 +34,7 @@ BASE_PACKAGES <-
   "tcltk",
   "tools",
   "utils")
- 
+
 #' Quickly generate an renv compliant lock file
 #'
 #' These functions generate json lockfiles that can be restored from using
@@ -103,6 +103,8 @@ get_project_dcfs <- function(declared_deps, pkg_names, pkg_dcfs) {
     )
     current_deps <- new_current_deps
   }
+  missing <- setdiff(names(project_deps), unlist(pkg_names))
+  if (length(missing)) stop("Project dependencies not installed: ", paste(missing, collapse = ", "))
   stats::setNames(pkg_dcfs, pkg_names)[unlist(project_deps)]
 }
 
@@ -143,7 +145,7 @@ generate_lockfile_json <- function(project_dep_dcfs, minify = FALSE) {
   )
 }
 
-# This implementation tries to follow logic in 
+# This implementation tries to follow logic in
 # renv:::renv_snapshot_description_source
 # https://github.com/rstudio/renv/blob/master/R/snapshot.R
 get_renv_fields <- function(dcf_record) {
