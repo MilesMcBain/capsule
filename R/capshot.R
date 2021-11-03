@@ -104,7 +104,10 @@ get_project_dcfs <- function(declared_deps, pkg_names, pkg_dcfs) {
     current_deps <- new_current_deps
   }
   missing <- setdiff(names(project_deps), unlist(pkg_names))
-  if (length(missing)) stop("Project dependencies not installed: ", paste(missing, collapse = ", "))
+  if (length(missing)) stop("Cannot complete capshot(). Project dependencies not installed locally: ", 
+  paste(missing, collapse = ", "), "\n\n",
+  "Use dev_mirror_lockfile() to bring the local library up to at least the lockfile versions for all dependencies."
+  )
   stats::setNames(pkg_dcfs, pkg_names)[unlist(project_deps)]
 }
 
