@@ -3,6 +3,16 @@
 
   [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
+
+# Installation
+
+Install from [GitHub](https://github.com/) with:
+
+``` {.r}
+# install.packages("remotes")
+remotes::install_github("milesmcBain/capsule")
+```
+
 # Overview
 
 A `capsule` is a stable project-specific R package library that you consciously
