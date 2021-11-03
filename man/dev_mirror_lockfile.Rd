@@ -28,5 +28,5 @@ Packages are installed at the lockfile version. Packages in the local library th
 
 So this function ensures that the local development environment is \strong{at least} at the lockfile version of all packages, not \strong{equal to}.
 
-To find differences between the local library and the lockfile versions use compare_
+To find differences between the local library and the lockfile versions use \code{\link[=compare_local_to_lockfile]{compare_local_to_lockfile()}}.
 }

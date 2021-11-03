@@ -6,7 +6,7 @@
 #'
 #' So this function ensures that the local development environment is **at least** at the lockfile version of all packages, not **equal to**.
 #'
-#' To find differences between the local library and the lockfile versions use compare_
+#' To find differences between the local library and the lockfile versions use [compare_local_to_lockfile()].
 #'
 #' @param lockfile_path lockfile to be compared to local environment.
 #' @param dep_source_paths R files to search for dependencies, the set of packages to be updated is limited to these dependencies (and their dependencies).
