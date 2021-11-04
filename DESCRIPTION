@@ -1,6 +1,6 @@
 Package: capsule
 Title: A streamlined inversion of `renv` 
-Version: 0.4.0.9000
+Version: 0.4.0.9001
 Authors@R: 
     person(given = "Miles",
            family = "McBain",

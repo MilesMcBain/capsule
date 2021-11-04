@@ -13,6 +13,7 @@
 #' @param prompt ask for confirmation after displaying list to be installed and before isntalling?
 #'
 #' @return names of the packages updated or to be updated (if install did not proceed) invisibly.
+#' @export
 dev_mirror_lockfile <- function(
   lockfile_path = "./renv.lock",
   dep_source_paths = NULL,
