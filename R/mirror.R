@@ -19,40 +19,44 @@ dev_mirror_lockfile <- function(
   dep_source_paths = NULL,
   prompt = interactive()
 ) {
-  lockfile_deps <- get_pkg_behind_lockfile(lockfile_path, dep_source_paths)
+  with_.env_if_available({
+    lockfile_deps <- get_pkg_behind_lockfile(lockfile_path, dep_source_paths)
 
-  packages_to_update <- lockfile_deps$name
-  if (length(packages_to_update) == 0) {
-    cat("No packages to update.\n")
-    return(invisible(character(0)))
-  }
+    packages_to_update <- lockfile_deps$name
+    if (length(packages_to_update) == 0) {
+      cat("No packages to update.\n")
+      return(invisible(character(0)))
+    }
 
-  cat(
-    length(packages_to_update),
-    "packages to be updated to lockfile versions:\n"
-  )
-  cat(
-    paste(
-      format(lockfile_deps$name),
-      format(lockfile_deps$version_lib),
-      " -> ",
-      format(lockfile_deps$version_lock)
-    ),
-    sep = "\n"
-  )
-  proceed <- utils::menu(choices = c("Yes", "No"), title = "Proceed with installation?")
+    cat(
+      length(packages_to_update),
+      "packages to be updated to lockfile versions:\n"
+    )
+    cat(
+      paste(
+        format(lockfile_deps$name),
+        format(lockfile_deps$version_lib),
+        " -> ",
+        format(lockfile_deps$version_lock)
+      ),
+      sep = "\n"
+    )
+    proceed <- utils::menu(choices = c("Yes", "No"), title = "Proceed with installation?")
 
-  if (proceed == 2) return(invisible(packages_to_update))
-  renv::restore(packages = packages_to_update, prompt = FALSE)
-  invisible(packages_to_update)
+    if (proceed == 2) {
+      return(invisible(packages_to_update))
+    }
+    renv::restore(packages = packages_to_update, prompt = FALSE)
+    invisible(packages_to_update)
+  })
 }
 
 #' Complain if the local R library has packages that are behind the lockfile versions
-#' 
+#'
 #' Useful for keeping teams loosely in sync on package versions. A warning can
 #' be tolerated until updating at a convenient time. For example if
 #' placed in the packages.R file of a `{tflow}` project.
-#' 
+#'
 #' The message is hardcoded, but the whinge_fun that takes the message is customisable.
 #'
 #' @param whinge_fun the function to use to have a whinge about packages, e.g. message, warning, stop, etc.
@@ -61,8 +65,10 @@ dev_mirror_lockfile <- function(
 #' @export
 whinge <- function(whinge_fun = warning, lockfile_path = "./renv.lock") {
   if (any_local_behind_lockfile(lockfile_path)) {
-    whinge_fun("[{capsule} whinge] Your R library packages are behind the lockfile.",
-    " Use capsule::dev_mirror_lockfile to upgrade.")
+    whinge_fun(
+      "[{capsule} whinge] Your R library packages are behind the lockfile.",
+      " Use capsule::dev_mirror_lockfile to upgrade."
+    )
   }
 }
 

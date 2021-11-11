@@ -5,29 +5,33 @@
 ##' file that contains all library() calls - hence this makes an explicit
 ##' assertion of your dependencies. This way spurious usages of pkg:: for
 ##' packages not stated as dependencies will cause errors that can be caught.
-##' 
+##'
 ##' @title create
 ##' @param dep_source_paths files to find package dependencies in.
 ##' @return nothing. Creates a capsule as a side effect.
 ##' @author Miles McBain
 ##' @export
 create <- function(dep_source_paths = "./packages.R") {
+  with_.env_if_available({
+    callr::r(function() {
+      renv::init(bare = TRUE)
+      renv::deactivate()
+    })
 
-  callr::r(function(){
-    renv::init(bare = TRUE)
-    renv::deactivate()
+
+    renv::hydrate(
+      detect_dependencies(dep_source_paths),
+      library = renv::paths$library(),
+      update = "all"
+    )
+
+    delete_unneeded()
+
+    renv::snapshot(
+      type = "simple",
+      library = c(renv::paths$library()),
+      confirm = FALSE,
+      force = TRUE
+    )
   })
-
-
-  renv::hydrate(detect_dependencies(dep_source_paths),
-                library = renv::paths$library(),
-                update = "all")
-
-  delete_unneeded()
-
-  renv::snapshot(type = "simple",
-                 library = c(renv::paths$library()),
-                 confirm = FALSE,
-                 force = TRUE)
-
 }
