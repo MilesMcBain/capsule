@@ -173,7 +173,7 @@ get_renv_fields <- function(dcf_record) {
     "Version",
     "Repository",
     "OS_type",
-    colnames(dcf_record_df)[grepl("^Remote", colnames(dcf_record_df))]
+    colnames(dcf_record_df)[grepl("^Remote(?!s$)", colnames(dcf_record_df), perl = TRUE)]
   )
   as.list(dcf_record_df[, intersect(renv_fields, colnames(dcf_record_df))])
 
@@ -204,4 +204,8 @@ function() {
   lockfile <-
     capshot("../coolburn_dashboard/packages.R", lockfile_path = "renv.lock", minify = TRUE)
   lockfile
+
+  dummy <- c("Remotes", "RemoteSha", "RemoteUsername", "RemotePkgRef")
+  grepl("^Remote(?!s$)", dummy, perl = TRUE)
 }
+
