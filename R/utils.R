@@ -1,8 +1,8 @@
 system_libraries <- function() {
 
-  purrr::keep(
-    .libPaths(),
-    ~ fs::path_has_parent(., Sys.getenv("R_HOME"))
+  Filter(
+    function(x) fs::path_has_parent(x, Sys.getenv("R_HOME")),
+    .libPaths()
   )
 
 }

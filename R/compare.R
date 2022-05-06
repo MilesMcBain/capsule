@@ -4,7 +4,7 @@
 #' lockfile versions (at `lockfile_path`).
 #'
 #' if `dep_source_paths` is supplied only dependencies declared in these files are returned.
-#' 
+#'
 #' Information is returned about packages that are behind in your development
 #' environment, so you can update them to the capsule versions if you wish.
 #'
@@ -12,7 +12,7 @@
 #' different remote SHA. E.g. A package in one library is from GitHub and in
 #' the other library is from CRAN. Or Both packages are from GitHub, have the
 #' same version but different SHAs.
-#' 
+#'
 #' @param dep_source_paths a character vector of file paths to extract
 #'     package dependencies from. If NULL (default) the whole local library is compared.
 #' @param lockfile_path a length one character vector path of the lockfile for
@@ -32,8 +32,8 @@
 get_local_behind_lockfile <- function(
   lockfile_path = "./renv.lock",
   dep_source_paths = NULL
-  ) {
-    get_pkg_behind_lockfile(lockfile_path, dep_source_paths)
+) {
+  get_pkg_behind_lockfile(lockfile_path, dep_source_paths)
 }
 
 #' @family comparisons
@@ -42,8 +42,8 @@ get_local_behind_lockfile <- function(
 get_capsule_behind_lockfile <- function(
   lockfile_path = "./renv.lock",
   dep_source_paths = NULL
-  ) {
-    get_pkg_behind_lockfile(lockfile_path, dep_source_paths, library_path = renv::paths$library())
+) {
+  get_pkg_behind_lockfile(lockfile_path, dep_source_paths, library_path = renv::paths$library())
 }
 
 
@@ -64,9 +64,10 @@ get_pkg_behind_lockfile <- function(
   }
 
   behind <-
-    purrr::pmap_lgl(
-      package_data,
-      function(...) {
+    .mapply(
+      dots = package_data,
+      MoreArgs = NULL,
+      FUN = function(...) {
         data_row <- list(...)
         version_comp <- utils::compareVersion(
           data_row$version_lock,
@@ -79,7 +80,7 @@ get_pkg_behind_lockfile <- function(
         #   i.e. one is from CRAN and one is from GitHub
         # * both have remote shas and they are not equal
         if (version_comp == 0 &&
-          ((!is.na(data_row$remote_sha_lock) && data_row$repository_lock != "CRAN") || 
+          ((!is.na(data_row$remote_sha_lock) && data_row$repository_lock != "CRAN") ||
             (!is.na(data_row$remote_sha_lib) && data_row$repository_lib != "CRAN")
           ) &&
           !isTRUE(data_row$remote_sha_lock == data_row$remote_sha_lib)) {
@@ -95,9 +96,9 @@ get_pkg_behind_lockfile <- function(
       }
     )
 
-  package_data$behind <- behind
+  package_data$behind <- unlist(behind)
 
-  package_data[behind, ]
+  package_data[package_data$behind, ]
 }
 
 #' check if any local packages are behind lockfile
@@ -131,24 +132,24 @@ assert_not_behind_lockfile <- function(
   if (nrow(packages_behind_lockfile) == 0) {
     message("No installed packages are behind renv.lock")
   } else {
-      action_fun <- if (stop_on_behind) stop else warning
-      action_fun(
-          "Found packages with versions behind renv.lock: ",  
-          paste0(packages_behind_lockfile$name, collapse = ", ")
-      )
+    action_fun <- if (stop_on_behind) stop else warning
+    action_fun(
+      "Found packages with versions behind renv.lock: ",
+      paste0(packages_behind_lockfile$name, collapse = ", ")
+    )
   }
 
 }
 
 
-#' compare the local R library with the lockfile 
-#' 
+#' compare the local R library with the lockfile
+#'
 #' Get a summary dataframe comparing package versions in the lockfile with
 #' versions in the local R library (.libPaths()) or capsule library (./renv).
 #'
 #' @inheritParams get_local_behind_lockfile
 #' @return a summary dataframe of version differences
-#' 
+#'
 #' @export
 #' @family comparisons
 #' @rdname compare_lockfile
@@ -241,23 +242,28 @@ function() {
 
   any_pkg_behind_lockfile(lockfile_path, dep_source_paths)
 
-  withr::with_dir("../analytics_aws_data_export",
+  withr::with_dir(
+    "../analytics_aws_data_export",
     compare_local_to_lockfile()
   )
 
-  withr::with_dir("../analytics_aws_data_export",
+  withr::with_dir(
+    "../analytics_aws_data_export",
     compare_capsule_to_lockfile()
   )
 
-  withr::with_dir("../analytics_aws_data_export",
+  withr::with_dir(
+    "../analytics_aws_data_export",
     any_pkg_behind_capusle()
   )
 
-  withr::with_dir("../analytics_aws_data_export",
+  withr::with_dir(
+    "../analytics_aws_data_export",
     any_pkg_behind_lockfile()
   )
 
-  withr::with_dir("../analytics_aws_data_export",
+  withr::with_dir(
+    "../analytics_aws_data_export",
     lockfile_deps <- get_pkg_behind_lockfile
   )
   find.package("qfesdata")
