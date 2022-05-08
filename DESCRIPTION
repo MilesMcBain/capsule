@@ -25,3 +25,6 @@ Remotes:
     anthonynorth/using
 RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
