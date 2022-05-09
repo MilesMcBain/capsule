@@ -11,23 +11,19 @@
 ##' @return nothing. Creates a capsule as a side effect.
 ##' @author Miles McBain
 ##' @export
-create <- function(dep_source_paths = "./packages.R") {
+create <- function(
+  dep_source_paths = "./packages.R",
+  lockfile_path = "./renv.lock"
+) {
 
-  callr::r(function(){
-    renv::init(bare = TRUE)
-    renv::deactivate()
-  })
-
-
-  renv::hydrate(detect_dependencies(dep_source_paths),
-                library = renv::paths$library(),
-                update = "all")
-
-  delete_unneeded()
-
-  renv::snapshot(type = "simple",
-                 library = c(renv::paths$library()),
-                 confirm = FALSE,
-                 force = TRUE)
-
+  if (file.exists(lockfile_path)) {
+    warning("Found an existing lockfile, ",
+        lockfile_path,
+        ", that will be ovewritten.")
+  }
+  capshot(
+    dep_source_paths = dep_source_paths,
+    lockfile_path = lockfile_path
+  )
+  reproduce_lib()
 }

@@ -1,8 +1,8 @@
 system_libraries <- function() {
 
-  purrr::keep(
-    .libPaths(),
-    ~ fs::path_has_parent(., Sys.getenv("R_HOME"))
+  Filter(
+    function(x) fs::path_has_parent(x, Sys.getenv("R_HOME")),
+    .libPaths()
   )
 
 }
@@ -28,4 +28,11 @@ assert_files_exist <- function(...) {
       paste0(files[missing_files], collapse = ", ")
     )
   }
+}
+
+lapply_df <- function(vec, fn, ...) {
+  do.call(
+    rbind,
+    lapply(vec, fn, ...)
+  )
 }

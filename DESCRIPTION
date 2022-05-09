@@ -1,6 +1,6 @@
 Package: capsule
 Title: A streamlined inversion of `renv` 
-Version: 0.4.0.9004
+Version: 0.4.0.9005
 Authors@R: 
     person(given = "Miles",
            family = "McBain",
@@ -16,7 +16,6 @@ Imports:
     renv (>= 0.7.0.125),
     withr,
     using (>= 0.4.0),
-    purrr,
     fs,
     jsonlite,
     stats,
@@ -25,3 +24,6 @@ Remotes:
     anthonynorth/using
 RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
