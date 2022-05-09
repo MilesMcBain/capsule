@@ -179,7 +179,7 @@ compare_lib_lockfile <- function(
 get_lockfile_deps <- function(lockfile_path) {
   lockfile <- jsonlite::read_json(lockfile_path)
 
-  lockfile_deps <- purrr::map_dfr(
+  lockfile_deps <- lapply_df(
     lockfile$Packages[],
     function(pkgdata) {
       data.frame(
@@ -198,7 +198,7 @@ get_lockfile_deps <- function(lockfile_path) {
 
 get_library_deps <- function(dep_list, library_path = NULL) {
   local_deps <-
-    purrr::map_dfr(
+    lapply_df(
       dep_list,
       function(dep_name) {
         tryCatch(

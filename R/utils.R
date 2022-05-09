@@ -29,3 +29,10 @@ assert_files_exist <- function(...) {
     )
   }
 }
+
+lapply_df <- function(vec, fn, ...) {
+  do.call(
+    rbind,
+    lapply(vec, fn, ...)
+  )
+}
