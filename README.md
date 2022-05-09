@@ -75,26 +75,15 @@ Render a document in the capsule:
 capsule::run_callr(function() rmarkdown::render("doc/analysis.Rmd"))
 ```
 
-Run your `drake` plan in the capsule:
+Run your `{targets}` plan in the capsule:
 
 ```r
-capsule::run(drake::r_make())
+capsule::run(targets::tar_make())
 ```
-
-Source and run a file in the capsule:
-
-```r
-capsule::run_callr(function() source("./main.R"))
-```
-
-Why `run_callr` vs `run`? Use `run` for things that _already create their own R
-processes_, use `run_callr()` for things that don't to avoid
-contamination with your dev global environment. You could always use `run_callr()` if in doubt.
 
 So what about code that you've just been handed? It has a `renv.lock` but no
 local library? How do you build the library to run the code? You don't! `run()`
-and `run_callr()` will check to see if a local library exists and build it if
-required.
+will check to see if a local library exists and build it if required. (You can do this manually with `reproduce_lib()`, if that feels better before calling `run()`).
 
 ## `recreate()` the capsule
 
