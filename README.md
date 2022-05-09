@@ -1,14 +1,15 @@
 
 # capsule
 
-  [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-
+[![capsule status badge](https://milesmcbain.r-universe.dev/badges/capsule)](https://milesmcbain.r-universe.dev)
 
 # Installation
 
-``` {.r}
-# install.packages("remotes")
-remotes::install_github("milesmcBain/capsule")
+## R Universe
+``` {r}
+install.packages(
+   "capsule", 
+   repos = c(mm = "https://milesmcbain.r-universe.dev", getOption("repos")))
 ```
 
 # Overview
