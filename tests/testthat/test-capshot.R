@@ -8,20 +8,24 @@ differences_in <- function(a, b, diffs) {
 }
 
 test_that("test capshot", {
+
+  capsule_lock <- tempfile(fileext = ".lock")
+  renv_lock <- tempfile(fileext = ".lock")
+
   capshot(
     testthat::test_path("datapasta.R"),
-    testthat::test_path("capsule.lock")
+    testthat::test_path(capsule_lock)
   )
   renv::snapshot(
     testthat::test_path("datapasta.R"),
-    lockfile = testthat::test_path("renv.lock"),
+    lockfile = testthat::test_path(renv_lock),
     packages = names(
       detect_dependencies(testthat::test_path("datapasta.R"))
     ),
     prompt = FALSE
   )
-  capsule_json <- jsonlite::fromJSON(testthat::test_path("capsule.lock"))
-  renv_json <- jsonlite::fromJSON(testthat::test_path("renv.lock"))
+  capsule_json <- jsonlite::fromJSON(capsule_lock)
+  renv_json <- jsonlite::fromJSON(renv_lock)
 
   # renv adds itself to the lockfile. Capsule doesn't need to do that.
   renv_json$Packages$renv <- NULL
@@ -61,6 +65,6 @@ test_that("test capshot", {
     })
 
   expect_true(all(unlist(package_data_similar)))
-  unlink(testthat::test_path("capsule.lock"))
-  unlink(testthat::test_path("renv.lock"))
+  unlink(capsule_lock)
+  unlink(renv_lock)
 })
