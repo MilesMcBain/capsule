@@ -235,45 +235,26 @@ get_library_deps <- function(dep_list, library_path = NULL) {
 
 # dev stuff
 function() {
-  dep_source_paths <- "../analytics_aws_data_export/packages.R"
-  lockfile_path <- "../analytics_aws_data_export/renv.lock"
+  dep_source_paths <- "../interactive_location_analytics/packages.R"
+  lockfile_path <- "../interactive_location_analytics/renv.lock"
 
   behind <- get_pkg_behind_lockfile(lockfile_path)
 
-  any_pkg_behind_lockfile(lockfile_path, dep_source_paths)
+  any_local_behind_lockfile(lockfile_path, dep_source_paths)
 
   withr::with_dir(
-    "../analytics_aws_data_export",
+    "../interactive_location_analytics",
     compare_local_to_lockfile()
   )
 
   withr::with_dir(
-    "../analytics_aws_data_export",
+    "../interactive_location_analytics",
     compare_capsule_to_lockfile()
   )
 
   withr::with_dir(
-    "../analytics_aws_data_export",
-    any_pkg_behind_capusle()
+    "../interactive_location_analytics",
+    any_local_behind_lockfile()
   )
 
-  withr::with_dir(
-    "../analytics_aws_data_export",
-    any_pkg_behind_lockfile()
-  )
-
-  withr::with_dir(
-    "../analytics_aws_data_export",
-    lockfile_deps <- get_pkg_behind_lockfile
-  )
-  find.package("qfesdata")
-
-  desc_file <- read.dcf(file.path(
-    find.package("mapdeck"),
-    "DESCRIPTION"
-  ))
-
-  desc_file[, "Version"]
-
-  as.data.frame(desc_file)
 }
