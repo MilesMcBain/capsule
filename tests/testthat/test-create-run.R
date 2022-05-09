@@ -1,4 +1,4 @@
-test_that("create works", {
+test_that("create and run works", {
   temp_dir <- tempdir()
   working_dir_path <- file.path(temp_dir, "capsule")
   dir.create(working_dir_path)
@@ -54,6 +54,18 @@ test_that("create works", {
       file.exists,
       logical(1)
     ))
+  )
+
+  # now let's check the lib paths using capsule::run()
+  capsule_lib_paths <- withr::with_dir(
+    working_dir_path,
+    capsule::run(.libPaths())
+  )
+
+  # The priority library is the same
+  expect_equal(
+    capsule_lib_paths[[1]],
+    lib_name
   )
 
   unlink(working_dir_path, recursive = TRUE)
