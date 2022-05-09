@@ -17,7 +17,7 @@ create <- function(
 ) {
 
   if (file.exists(lockfile_path)) {
-    warning("Found an existing lockfile, ", 
+    warning("Found an existing lockfile, ",
         lockfile_path,
         ", that will be ovewritten.")
   }
@@ -25,8 +25,5 @@ create <- function(
     dep_source_paths = dep_source_paths,
     lockfile_path = lockfile_path
   )
-  reproduce_lib(
-    dep_source_paths = dep_source_paths,
-    lockfile_path = lockfile_path
-  )
+  reproduce_lib()
 }
