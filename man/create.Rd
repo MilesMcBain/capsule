@@ -4,7 +4,7 @@
 \alias{create}
 \title{create}
 \usage{
-create(dep_source_paths = "./packages.R")
+create(dep_source_paths = "./packages.R", lockfile_path = "./renv.lock")
 }
 \arguments{
 \item{dep_source_paths}{files to find package dependencies in.}
