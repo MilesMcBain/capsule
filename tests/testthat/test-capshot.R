@@ -14,11 +14,11 @@ test_that("test capshot", {
 
   capshot(
     testthat::test_path("datapasta.R"),
-    testthat::test_path(capsule_lock)
+    capsule_lock
   )
   renv::snapshot(
     testthat::test_path("datapasta.R"),
-    lockfile = testthat::test_path(renv_lock),
+    lockfile = renv_lock,
     packages = names(
       detect_dependencies(testthat::test_path("datapasta.R"))
     ),
