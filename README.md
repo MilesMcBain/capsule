@@ -73,10 +73,10 @@ file. This will allow someone else to `run()` code in the capsule context.
 Render a document in the capsule:
 
 ```r
-capsule::run_callr(function() rmarkdown::render("doc/analysis.Rmd"))
+capsule::run(rmarkdown::render("doc/analysis.Rmd"))
 ```
 
-Run your `{targets}` plan in the capsule:
+Or run your `{targets}` plan in the capsule:
 
 ```r
 capsule::run(targets::tar_make())
@@ -84,7 +84,7 @@ capsule::run(targets::tar_make())
 
 So what about code that you've just been handed? It has a `renv.lock` but no
 local library? How do you build the library to run the code? You don't! `run()`
-will check to see if a local library exists and build it if required. (You can do this manually with `reproduce_lib()`, if that feels better before calling `run()`).
+will check to see if a local library exists, and build it if required. (You can do this manually with `reproduce_lib()`, if that feels better before calling `run()`).
 
 ## `recreate()` the capsule
 
