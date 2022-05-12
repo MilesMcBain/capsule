@@ -9,62 +9,70 @@ differences_in <- function(a, b, diffs) {
 
 test_that("test capshot", {
 
-  capsule_lock <- tempfile(fileext = ".lock")
-  renv_lock <- tempfile(fileext = ".lock")
+  withr::with_temp_libpaths({
+    install.packages(
+      "testrpkg",
+      repos = c(mm = "https://milesmcbain.r-universe.dev", getOption("repos"))
+    )
+    
 
-  capshot(
-    testthat::test_path("datapasta.R"),
-    capsule_lock
-  )
-  renv::snapshot(
-    testthat::test_path("datapasta.R"),
-    lockfile = renv_lock,
-    packages = names(
-      detect_dependencies(testthat::test_path("datapasta.R"))
-    ),
-    prompt = FALSE
-  )
-  capsule_json <- jsonlite::fromJSON(capsule_lock)
-  renv_json <- jsonlite::fromJSON(renv_lock)
+    capsule_lock <- tempfile(fileext = ".lock")
+    renv_lock <- tempfile(fileext = ".lock")
 
-  # renv adds itself to the lockfile. Capsule doesn't need to do that.
-  renv_json$Packages$renv <- NULL
+    capshot(
+      testthat::test_path("__testrpkg.R"),
+      capsule_lock
+    )
+    renv::snapshot(
+      testthat::test_path("__testrpkg.R"),
+      lockfile = renv_lock,
+      packages = names(
+        detect_dependencies(testthat::test_path("__testrpkg.R"))
+      ),
+      prompt = FALSE
+    )
+    capsule_json <- jsonlite::fromJSON(capsule_lock)
+    renv_json <- jsonlite::fromJSON(renv_lock)
 
-  # need to put packages in same order
-  capsule_json$Packages <- sort_by_name(capsule_json$Packages)
-  renv_json$Packages <- sort_by_name(capsule_json$Packages)
+    # renv adds itself to the lockfile. Capsule doesn't need to do that.
+    renv_json$Packages$renv <- NULL
 
-  # again ignoring renv in the lock, are the packages the same
-  expect_equal(
-    setdiff(names(renv_json$Packages), "renv"),
-    names(capsule_json$Packages)
-  )
+    # need to put packages in same order
+    capsule_json$Packages <- sort_by_name(capsule_json$Packages)
+    renv_json$Packages <- sort_by_name(capsule_json$Packages)
 
-  comparison_packages <- names(capsule_json$Packages)
+    # again ignoring renv in the lock, are the packages the same
+    expect_equal(
+      setdiff(names(renv_json$Packages), "renv"),
+      names(capsule_json$Packages)
+    )
 
-  # Does the data for each package have the same values.
-  # Order doesn't matter.
-  package_data_similar <-
-    lapply(comparison_packages, function(package_name) {
-      capsule_package_data <- capsule_json$Packages[[package_name]]
-      renv_package_data <- renv_json$Packages[[package_name]]
+    comparison_packages <- names(capsule_json$Packages)
 
-      capsule_package_data_names <- names(
-        capsule_package_data
-      )
+    # Does the data for each package have the same values.
+    # Order doesn't matter.
+    package_data_similar <-
+      lapply(comparison_packages, function(package_name) {
+        capsule_package_data <- capsule_json$Packages[[package_name]]
+        renv_package_data <- renv_json$Packages[[package_name]]
 
-      differences_in(
-        names(renv_package_data),
-        names(capsule_package_data),
-        c("Hash", "Requirements")
-      ) &&
-        all(
-          unlist(capsule_package_data[capsule_package_data_names]) ==
-            unlist(renv_package_data[capsule_package_data_names])
+        capsule_package_data_names <- names(
+          capsule_package_data
         )
-    })
 
-  expect_true(all(unlist(package_data_similar)))
-  unlink(capsule_lock)
-  unlink(renv_lock)
+        differences_in(
+          names(renv_package_data),
+          names(capsule_package_data),
+          c("Hash", "Requirements")
+        ) &&
+          all(
+            unlist(capsule_package_data[capsule_package_data_names]) ==
+              unlist(renv_package_data[capsule_package_data_names])
+          )
+      })
+
+    expect_true(all(unlist(package_data_similar)))
+    unlink(capsule_lock)
+    unlink(renv_lock)
+  })
 })
