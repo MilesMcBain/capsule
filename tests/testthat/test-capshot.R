@@ -12,7 +12,7 @@ test_that("test capshot", {
   withr::with_temp_libpaths({
     install.packages(
       "testrpkg",
-      repos = c(mm = "https://milesmcbain.r-universe.dev", getOption("repos"))
+      repos = c(mm = "https://milesmcbain.r-universe.dev", CRAN = "https://cloud.r-project.org/")
     )
     
 
