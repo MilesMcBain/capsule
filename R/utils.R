@@ -36,3 +36,8 @@ lapply_df <- function(vec, fn, ...) {
     lapply(vec, fn, ...)
   )
 }
+
+# detect the case where some package install tools store the version number in the remoteSha field. 
+is_real_sha <- function(sha) {
+  !grepl("\\.", sha)
+}
