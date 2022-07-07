@@ -1,0 +1,27 @@
+{
+  "R": {
+    "Version": "4.2.0",
+    "Repositories": [
+      {
+        "Name": "RENV",
+        "URL": "file:///home/ubuntu/R/x86_64-pc-linux-gnu-library/4.2/renv/repos"
+      },
+      {
+        "Name": "RSPM",
+        "URL": "https://packagemanager.rstudio.com/all/__linux__/focal/latest"
+      },
+      {
+        "Name": "CRAN",
+        "URL": "https://cloud.r-project.org"
+      }
+    ]
+  },
+  "Packages": {
+    "renv": {
+      "Source": "Repository",
+      "Package": "renv",
+      "Version": "0.15.4",
+      "Repository": "RSPM"
+    }
+  }
+}

@@ -5,5 +5,8 @@ test_that("is_real_sha works", {
 
   expect_false(is_real_sha(fake_sha))
   expect_true(is_real_sha(real_sha))
+  expect_false(is_real_sha(NA))
+  expect_false(is_real_sha(NULL))
+  expect_false(is_real_sha(character(0)))
 
 })

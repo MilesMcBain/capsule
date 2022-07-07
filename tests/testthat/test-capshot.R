@@ -9,12 +9,9 @@ differences_in <- function(a, b, diffs) {
 
 test_that("test capshot", {
 
-  withr::with_temp_libpaths({
-    install.packages(
-      "testrpkg",
-      repos = c(mm = "https://milesmcbain.r-universe.dev", CRAN = "https://cloud.r-project.org/")
-    )
-    
+  withr::with_libpaths(
+    new = get_test_libpaths(),
+    code = {
 
     capsule_lock <- tempfile(fileext = ".lock")
     renv_lock <- tempfile(fileext = ".lock")
@@ -72,7 +69,8 @@ test_that("test capshot", {
       })
 
     expect_true(all(unlist(package_data_similar)))
-    unlink(capsule_lock)
-    unlink(renv_lock)
+    withr::defer(unlink(capsule_lock), teardown_env())
+    withr::defer(unlink(renv_lock), teardown_env())
+    
   })
 })
