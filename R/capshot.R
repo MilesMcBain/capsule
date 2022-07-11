@@ -151,6 +151,13 @@ generate_lockfile_json <- function(project_dep_dcfs, minify = FALSE) {
 # This implementation tries to follow logic in
 # renv:::renv_snapshot_description_source
 # https://github.com/rstudio/renv/blob/b314054506b37924cde6fbcd46078f8e57d94dd4/R/snapshot.R
+# renv:::renv_snapshot_description_source is distributed with an MIT style license:
+
+# Copyright 2021 RStudio, PBC
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+#
 get_renv_fields <- function(dcf_record) {
   dcf_record_df <- as.data.frame(dcf_record)
   if (!is.null(dcf_record_df$RemoteType)) {

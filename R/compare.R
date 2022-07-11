@@ -222,7 +222,7 @@ dependency_data_frame <- function(dep_data) {
     version = dep_data$Version %||% NA,
     repository = dep_data$Repository %||%
       dep_data$RemoteHost %||% NA,
-    remote_sha = ifelse(is_real_sha(dep_data$RemoteSha), dap_data$RemoteSha, NA),
+    remote_sha = ifelse(is_real_sha(dep_data$RemoteSha), dep_data$RemoteSha, NA),
     remote_repo = dep_data$RemoteRepo %||% NA,
     remote_username = dep_data$RemoteUsername %||% NA
   )

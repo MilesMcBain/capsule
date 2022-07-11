@@ -11,6 +11,11 @@ get_test_libpaths <- function() {
   )
 }
 
+# Set CRAN
+old_repos <- getOption("repos")
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+withr::defer(options(repos = old_repos), teardown_env())
+
 # populate test library
 withr::with_libpaths(
   new = temp_lib_path,
