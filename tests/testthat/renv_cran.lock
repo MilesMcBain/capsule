@@ -1,0 +1,19 @@
+{
+  "R": {
+    "Version": "4.2.0",
+    "Repositories": [
+      {
+        "Name": "CRAN",
+        "URL": "https://cran.rstudio.com"
+      }
+    ]
+  },
+  "Packages": {
+    "renv": {
+      "Source": "Repository",
+      "Package": "renv",
+      "Version": "0.15.5",
+      "Repository": "CRAN"
+    }
+  }
+}

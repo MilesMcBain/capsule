@@ -80,8 +80,9 @@ get_pkg_behind_lockfile <- function(
         #   i.e. one is from CRAN and one is from GitHub
         # * both have remote shas and they are not equal
         if (version_comp == 0 &&
-          ((!is.na(data_row$remote_sha_lock) && data_row$repository_lock != "CRAN") ||
-            (!is.na(data_row$remote_sha_lib) && data_row$repository_lib != "CRAN")
+          (
+            (!is.na(data_row$remote_sha_lock)) ||
+            (!is.na(data_row$remote_sha_lib))
           ) &&
           !isTRUE(data_row$remote_sha_lock == data_row$remote_sha_lib)) {
           warning(
@@ -181,16 +182,7 @@ get_lockfile_deps <- function(lockfile_path) {
 
   lockfile_deps <- lapply_df(
     lockfile$Packages[],
-    function(pkgdata) {
-      data.frame(
-        name = pkgdata$Package %||% NA,
-        version = pkgdata$Version %||% NA,
-        repository = pkgdata$Repository %||% pkgdata$RemoteHost %||% NA,
-        remote_sha = pkgdata$RemoteSha %||% NA,
-        remote_repo = pkgdata$RemoteRepo %||% NA,
-        remote_username = pkgdata$RemoteUsername %||% NA
-      )
-    }
+    dependency_data_frame
   )
 
   lockfile_deps
@@ -207,30 +199,34 @@ get_library_deps <- function(dep_list, library_path = NULL) {
               find.package(dep_name, lib.loc = library_path),
               "DESCRIPTION"
             )))
-
-            data.frame(
-              name = lib_data$Package,
-              version = lib_data$Version,
-              repository = lib_data$Repository %||%
-                lib_data$RemoteHost %||% NA,
-              remote_sha = lib_data$RemoteSha %||% NA,
-              remote_repo = lib_data$RemoteRepo %||% NA,
-              remote_username = lib_data$RemoteUsername %||% NA
+            dependency_data_frame(
+              lib_data
             )
           },
           error = function(e) {
-            data.frame(
-              name = dep_name,
-              version = NA,
-              repository = NA,
-              remote_sha = NA,
-              remote_repo = NA,
-              remote_username = NA
+            dependency_data_frame(
+              list(
+                Package = dep_name
+              )
             )
           }
         )
       }
     )
+}
+
+dependency_data_frame <- function(dep_data) {
+
+  data.frame(
+    name = dep_data$Package %||% NA,
+    version = dep_data$Version %||% NA,
+    repository = dep_data$Repository %||%
+      dep_data$RemoteHost %||% NA,
+    remote_sha = ifelse(is_real_sha(dep_data$RemoteSha), dep_data$RemoteSha, NA),
+    remote_repo = dep_data$RemoteRepo %||% NA,
+    remote_username = dep_data$RemoteUsername %||% NA
+  )
+
 }
 
 # dev stuff
