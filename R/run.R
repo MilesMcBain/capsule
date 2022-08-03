@@ -45,6 +45,29 @@ run_callr <- function(func, ...) {
 
 }
 
+#' Run an R script in a new process in the capsule
+#'
+#' Execute the supplied R script in the context of the capsule library using
+#' [callr::rscript()]. This ensures the script is executed in a new R process
+#' that will not be contaminated by the state of the interactive development
+#' environment and will use the R packages and versions in the capsule.
+#'
+#' @seealso [run_callr()] for more details relevant to `run_rscript()`,
+#'   [callr::r()] for detailed calling semantics, [create()] to make the
+#'   lockfile. [run()] for a lighter weight alternative.
+#'
+#' @param path The path to the R script
+#' @inheritParams callr::rscript
+#' @inheritDotParams callr::rscript
+#'
+#' @return Invisibly returns the result of [callr::rscript()]
+#'
+#' @export
+run_rscript <- function(path, ..., show = TRUE) {
+  reproduce_lib_if_not_present()
+  callr::rscript(path, libpath = c(renv::paths$library()), show = show, ...)
+}
+
 
 #' @rdname run
 #' @export
@@ -59,12 +82,12 @@ run <- function(code) {
 }
 
 ##' run code in the context of the capsule in the current R session
-##' 
+##'
 ##' Execute the supplied function in the context of the capsule library, by
 ##' changing the R library paths it searches.
 ##'
 ##' In almost all cases, run or run_callr which do effectively the same thing,
-##' are preferred. This is because the `code` argument can cause packages 
+##' are preferred. This is because the `code` argument can cause packages
 ##' to be attached, and thus not read from the capsule library.
 ##'
 ##' For example if `code` was `drake::r_make()` this would cause `drake`, to
