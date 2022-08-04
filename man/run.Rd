@@ -5,7 +5,7 @@
 \alias{run}
 \title{run functions in the capsule}
 \usage{
-run_callr(func, ...)
+run_callr(func, show = TRUE, ...)
 
 run(code)
 }
