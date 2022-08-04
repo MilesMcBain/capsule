@@ -1,3 +1,7 @@
+# Version 0.4.2
+
+  * New `run_rscript()` can run R scripts in the capsule via `callr::rscript()` (@gadenbuie #27)
+
 # Version 0.4.1
 
   * remove `capshot` dependency on `renv:::renv_alias`.
