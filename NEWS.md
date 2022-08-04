@@ -1,6 +1,7 @@
 # Version 0.4.2
 
   * New `run_rscript()` can run R scripts in the capsule via `callr::rscript()` (@gadenbuie #27)
+  * `run_callr()` exposes the `show` option with default to `TRUE`. 
 
 # Version 0.4.1
 

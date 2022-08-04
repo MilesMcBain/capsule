@@ -35,13 +35,15 @@
 ##' By default rmarkdown::render looks into the .GlobalEnv:
 ##' run_session(rmarkdown::render("./analysis.Rmd"))
 ##' }
-run_callr <- function(func, ...) {
+run_callr <- function(func, show = TRUE, ...) {
 
   reproduce_lib_if_not_present()
-  callr::r(func = func,
-           libpath = c(renv::paths$library()),
-           show = TRUE,
-           ...)
+  callr::r(
+    func = func,
+    libpath = c(renv::paths$library()),
+    show = show,
+    ...
+  )
 
 }
 
@@ -65,7 +67,12 @@ run_callr <- function(func, ...) {
 #' @export
 run_rscript <- function(path, ..., show = TRUE) {
   reproduce_lib_if_not_present()
-  callr::rscript(path, libpath = c(renv::paths$library()), show = show, ...)
+  callr::rscript(
+    path,
+    libpath = c(renv::paths$library()),
+    show = show,
+    ...
+  )
 }
 
 
@@ -119,8 +126,10 @@ run <- function(code) {
 run_session <- function(code) {
 
   reproduce_lib_if_not_present()
-  withr::with_libpaths(new = renv::paths$library(),
-                       code = code)
+  withr::with_libpaths(
+    new = renv::paths$library(),
+    code = code
+  )
 
 }
 
