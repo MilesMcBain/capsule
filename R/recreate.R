@@ -7,15 +7,16 @@
 ##' Similarly to `create()`, you are expected to supply a vector of files in
 ##' your project to extract dependencies from. Things work best when this is a
 ##' single file containing only dependency related code.
-##' 
+##'
 ##' @title recreate
 ##' @param dep_source_paths a character vector of project source files to
-##'   extract dependencies from.
+##'   extract dependencies from.  Defaults to './packages.R`.
+##'   See [capsule_sources()] for setting other defaults.
 ##' @return nothing. The capsule is regenerated as a side effect.
 ##' @author Miles McBain
 ##' @seealso [create()]
 ##' @export
-recreate <- function(dep_source_paths = "./packages.R") {
+recreate <- function(dep_source_paths = capsule_sources()) {
 
   delete()
   create(dep_source_paths = dep_source_paths)
