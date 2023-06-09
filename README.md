@@ -60,7 +60,8 @@ The following package(s) will be updated in the lockfile:
 
 You supply a vector of file paths to extract dependencies from. The default is
 `"./packages.R"`. These dependencies are copied from your regular (dev) library
-to your local capsule.
+to your local capsule. These can also be set at the user or project level with
+`options(capsule.sources = <PATHS>)`, or a `CAPSULE_SOURCES` environment variable.
 
 Notice how this is easier when you keep your library calls all in one place? :wink:
 

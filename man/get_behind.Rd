@@ -41,9 +41,9 @@ same version but different SHAs.
 }
 \section{Functions}{
 \itemize{
-\item \code{get_capsule_behind_lockfile}: get packages in the renv library that are behind the lockfile
-}}
+\item \code{get_capsule_behind_lockfile()}: get packages in the renv library that are behind the lockfile
 
+}}
 \examples{
 \dontrun{
 get_local_behind_capsule(

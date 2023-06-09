@@ -50,13 +50,14 @@ BASE_PACKAGES <-
 #' be integrated into automated pipelines that build projects or documents.
 #'
 #' @param dep_source_paths files to scan for project dependencies to write to the lock file.
+#'   Defaults to './packages.R`. See [capsule_sources()] for setting other defaults.
 #' @param lockfile_path output path for the lock file.
 #' @param minify a boolean value indicicating if lockfile JSON should have whitespace removed to shrink footprint.
 #'
 #' @return `lockfile_path`. Writes lockfile as a side effect.
 #' @export
 capshot <- function(
-  dep_source_paths = "./packages.R",
+  dep_source_paths = capsule_sources(),
   lockfile_path = "./renv.lock",
   minify = FALSE
 ) {
@@ -69,7 +70,7 @@ capshot <- function(
 
 #' @describeIn capshot a variation that returns lockfile json as a character vector for further use.
 #' @export
-capshot_str <- function(dep_source_paths = "./packages.R", minify = FALSE) {
+capshot_str <- function(dep_source_paths = capsule_sources(), minify = FALSE) {
   generate_lockfile_json(
     get_project_deps(detect_dependencies(dep_source_paths)),
     minify = minify
@@ -104,7 +105,7 @@ get_project_dcfs <- function(declared_deps, pkg_names, pkg_dcfs) {
     current_deps <- new_current_deps
   }
   missing <- setdiff(names(project_deps), unlist(pkg_names))
-  if (length(missing)) stop("Cannot complete capshot(). Project dependencies not installed locally: ", 
+  if (length(missing)) stop("Cannot complete capshot(). Project dependencies not installed locally: ",
   paste(missing, collapse = ", "), "\n\n",
   "Use dev_mirror_lockfile() to bring the local library up to at least the lockfile versions for all dependencies."
   )

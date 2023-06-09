@@ -4,11 +4,12 @@
 \alias{recreate}
 \title{recreate}
 \usage{
-recreate(dep_source_paths = "./packages.R")
+recreate(dep_source_paths = capsule_sources())
 }
 \arguments{
 \item{dep_source_paths}{a character vector of project source files to
-extract dependencies from.}
+extract dependencies from.  Defaults to './packages.R`.
+See \code{\link[=capsule_sources]{capsule_sources()}} for setting other defaults.}
 }
 \value{
 nothing. The capsule is regenerated as a side effect.

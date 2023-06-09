@@ -6,15 +6,16 @@
 \title{Quickly generate an renv compliant lock file}
 \usage{
 capshot(
-  dep_source_paths = "./packages.R",
+  dep_source_paths = capsule_sources(),
   lockfile_path = "./renv.lock",
   minify = FALSE
 )
 
-capshot_str(dep_source_paths = "./packages.R", minify = FALSE)
+capshot_str(dep_source_paths = capsule_sources(), minify = FALSE)
 }
 \arguments{
-\item{dep_source_paths}{files to scan for project dependencies to write to the lock file.}
+\item{dep_source_paths}{files to scan for project dependencies to write to the lock file.
+Defaults to './packages.R`. See \code{\link[=capsule_sources]{capsule_sources()}} for setting other defaults.}
 
 \item{lockfile_path}{output path for the lock file.}
 
@@ -39,6 +40,6 @@ be integrated into automated pipelines that build projects or documents.
 }
 \section{Functions}{
 \itemize{
-\item \code{capshot_str}: a variation that returns lockfile json as a character vector for further use.
-}}
+\item \code{capshot_str()}: a variation that returns lockfile json as a character vector for further use.
 
+}}

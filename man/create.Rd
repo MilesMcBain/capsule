@@ -4,10 +4,11 @@
 \alias{create}
 \title{create}
 \usage{
-create(dep_source_paths = "./packages.R", lockfile_path = "./renv.lock")
+create(dep_source_paths = capsule_sources(), lockfile_path = "./renv.lock")
 }
 \arguments{
-\item{dep_source_paths}{files to find package dependencies in.}
+\item{dep_source_paths}{files to find package dependencies in.
+Defaults to './packages.R`. See \code{\link[=capsule_sources]{capsule_sources()}} for setting other defaults.}
 }
 \value{
 nothing. Creates a capsule as a side effect.
