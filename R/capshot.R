@@ -155,6 +155,10 @@ get_renv_fields <- function(dcf_record) {
     dcf_record_df$Source <- "BioConductor"
   } else {
     dcf_record_df$Source <- "unknown"
+    warning(
+      paste0("{", dcf_record_df$Package,"}", " has unknown source. Installed via {devtools} locally?. Install from remote to document source in lockfile."),
+      call. = FALSE
+    )
   }
 
   renv_fields <- c(
