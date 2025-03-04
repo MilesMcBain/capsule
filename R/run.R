@@ -23,6 +23,8 @@
 ##' @param code the body of function to be run in the
 ##'   capsule context. See Details.
 ##' @param ... additional arguments passed to `callr::r()`
+##' @param lockfile_path the path to lockfile for the capsule library. Default is `./renv.lock`.
+##' @param show Whether to show standard output in console.
 ##' @return output of `func`
 ##' @author Miles McBain
 ##' @seealso [callr::r()] for detailed calling semantics, [create()] to make the
@@ -35,7 +37,7 @@
 ##' By default rmarkdown::render looks into the .GlobalEnv:
 ##' run_session(rmarkdown::render("./analysis.Rmd"))
 ##' }
-run_callr <- function(func, show = TRUE, lockfile_path = "./renv.lock", ...) {
+run_callr <- function(func, show = TRUE, ..., lockfile_path = "./renv.lock") {
 
   reproduce_lib_if_not_present(lockfile_path)
   callr::r(
@@ -59,13 +61,15 @@ run_callr <- function(func, show = TRUE, lockfile_path = "./renv.lock", ...) {
 #'   lockfile. [run()] for a lighter weight alternative.
 #'
 #' @param path The path to the R script
+#' @param show Whether to show standard output in console.
+#' @param lockfile_path the path to lockfile for the capsule library. Default is `./renv.lock`.
 #' @inheritParams callr::rscript
 #' @inheritDotParams callr::rscript
 #'
 #' @return Invisibly returns the result of [callr::rscript()]
 #'
 #' @export
-run_rscript <- function(path, ..., show = TRUE) {
+run_rscript <- function(path, ..., lockfile_path = "./renv.lock", show = TRUE) {
   reproduce_lib_if_not_present()
   callr::rscript(
     path,
@@ -78,13 +82,13 @@ run_rscript <- function(path, ..., show = TRUE) {
 
 #' @rdname run
 #' @export
-run <- function(code) {
+run <- function(code, lockfile_path = "./renv.lock") {
 
   arg <- substitute(code)
   run_fn <- bquote(function() {
     .(arg)
   })
-  run_callr(eval(run_fn))
+  run_callr(eval(run_fn), lockfile_path = lockfile_path)
 
 }
 
@@ -110,6 +114,7 @@ run <- function(code) {
 ##'
 ##' @title run_session
 ##' @param code an expression to run in the context of the capsule library.
+##' @param lockfile_path the path to lockfile for the capsule library. Default is `./renv.lock`.
 ##' @return output of `code`
 ##' @author Miles McBain
 ##' @seealso [create()] to make the lockfile. [run_callr()] and [run()] for safer versions.
@@ -123,9 +128,9 @@ run <- function(code) {
 ##'    message("hello")
 ##'  })
 ##' }
-run_session <- function(code) {
+run_session <- function(code, lockfile_path = "./renv.lock") {
 
-  reproduce_lib_if_not_present()
+  reproduce_lib_if_not_present(lockfile_path)
   withr::with_libpaths(
     new = renv::paths$library(),
     code = code
