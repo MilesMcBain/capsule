@@ -27,13 +27,20 @@ test_that("create and run works", {
         )
       )
 
-      lib_name <- list.files(
+      lib_name <-
         list.files(
           file.path(working_dir_path, "renv", "library"),
+          pattern = "^.renv",
+          recursive = TRUE,
+          include.dirs = TRUE,
+          all.files = TRUE,
           full.names = TRUE
-        ),
-        full.names = TRUE
-      )
+        ) %>%
+      fs::path_split() %>%
+      unlist() %>%
+      head(-1) %>% # drop .renv
+      fs::path_join() %>%
+      as.character()
 
       libraries <- list.files(
         lib_name

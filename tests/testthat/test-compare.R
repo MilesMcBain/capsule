@@ -14,12 +14,8 @@ test_that("lockfile/library comparisons work", {
     working_dir_path,
     {
       # setup a fake R library
-      renv::restore(
-        project = getwd(),
-        library = renv::paths$library(),
-        lockfile = "renv_cran.lock",
-        confirm = FALSE,
-        repos = c(CRAN = "https://cran.rstudio.com")
+      reproduce_lib(
+        lockfile_path = "renv_cran.lock"
       )
 
       withr::with_libpaths(
