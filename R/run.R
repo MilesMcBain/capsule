@@ -35,9 +35,9 @@
 ##' By default rmarkdown::render looks into the .GlobalEnv:
 ##' run_session(rmarkdown::render("./analysis.Rmd"))
 ##' }
-run_callr <- function(func, show = TRUE, ...) {
+run_callr <- function(func, show = TRUE, lockfile_path = "./renv.lock", ...) {
 
-  reproduce_lib_if_not_present()
+  reproduce_lib_if_not_present(lockfile_path)
   callr::r(
     func = func,
     libpath = c(renv::paths$library()),
@@ -133,8 +133,8 @@ run_session <- function(code) {
 
 }
 
-reproduce_lib_if_not_present <- function() {
+reproduce_lib_if_not_present <- function(lockfile_path) {
 
-  if (!dir.exists(renv::paths$library())) reproduce_lib()
+  if (!dir.exists(locate_capsule())) reproduce_lib(lockfile_path)
 
 }
