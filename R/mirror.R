@@ -17,6 +17,7 @@
 dev_mirror_lockfile <- function(
   lockfile_path = "./renv.lock",
   dep_source_paths = NULL,
+  library_path = .libPaths(),
   prompt = interactive()
 ) {
   lockfile_deps <- get_pkg_behind_lockfile(lockfile_path, dep_source_paths)
@@ -43,36 +44,32 @@ dev_mirror_lockfile <- function(
   proceed <- utils::menu(choices = c("Yes", "No"), title = "Proceed with installation?")
 
   if (proceed == 2) return(invisible(packages_to_update))
-  renv::restore(packages = packages_to_update, prompt = FALSE)
+  renv::restore(
+    packages = packages_to_update,
+    prompt = FALSE,
+    library = library_path,
+    lockfile = lockfile_path
+    )
   invisible(packages_to_update)
 }
 
 #' Complain if the local R library has packages that are behind the lockfile versions
-#' 
+#'
 #' Useful for keeping teams loosely in sync on package versions. A warning can
 #' be tolerated until updating at a convenient time. For example if
 #' placed in the packages.R file of a `{tflow}` project.
-#' 
+#'
 #' The message is hardcoded, but the whinge_fun that takes the message is customisable.
 #'
 #' @param whinge_fun the function to use to have a whinge about packages, e.g. message, warning, stop, etc.
 #' @param lockfile_path the path to the project lockfile
+#' @param dep_source_paths to search for dependencies to comparage versions for. E.g. "packages.R"
+#'   If NULL the whole local library is compared
 #' @return output of whinge_fun, most likely nothing.
 #' @export
-whinge <- function(whinge_fun = warning, lockfile_path = "./renv.lock") {
-  if (any_local_behind_lockfile(lockfile_path)) {
+whinge <- function(whinge_fun = warning, lockfile_path = "./renv.lock", dep_source_paths = NULL) {
+  if (any_local_behind_lockfile(lockfile_path, dep_source_paths)) {
     whinge_fun("[{capsule} whinge] Your R library packages are behind the lockfile.",
     " Use capsule::dev_mirror_lockfile to upgrade.")
   }
-}
-
-function() {
-  withr::with_dir(
-    "../analytics_aws_data_export",
-    lockfile_deps <- get_pkg_behind_lockfile()
-  )
-  withr::with_dir(
-    "../analytics_aws_data_export",
-    dev_mirror_lockfile()
-  )
 }

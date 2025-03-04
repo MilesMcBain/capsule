@@ -31,9 +31,10 @@
 #' @rdname get_behind
 get_local_behind_lockfile <- function(
   lockfile_path = "./renv.lock",
-  dep_source_paths = NULL
+  dep_source_paths = NULL,
+  library_path = .libPaths()
 ) {
-  get_pkg_behind_lockfile(lockfile_path, dep_source_paths)
+  get_pkg_behind_lockfile(lockfile_path, dep_source_paths, library_path)
 }
 
 #' @family comparisons
@@ -43,14 +44,16 @@ get_capsule_behind_lockfile <- function(
   lockfile_path = "./renv.lock",
   dep_source_paths = NULL
 ) {
-  get_pkg_behind_lockfile(lockfile_path, dep_source_paths, library_path = renv::paths$library())
+  get_pkg_behind_lockfile(
+    lockfile_path,
+    dep_source_paths,
+    library_path = locate_capsule())
 }
-
 
 get_pkg_behind_lockfile <- function(
   lockfile_path = "./renv.lock",
   dep_source_paths = NULL,
-  library_path = NULL
+  library_path = .libPaths()
 ) {
   assert_files_exist(lockfile_path)
   package_data <- compare_lib_lockfile(lockfile_path, library_path)
@@ -155,19 +158,26 @@ assert_not_behind_lockfile <- function(
 #' @family comparisons
 #' @rdname compare_lockfile
 compare_local_to_lockfile <- function(lockfile_path = "./renv.lock") {
-  compare_lib_lockfile(lockfile_path)
+  compare_lib_lockfile(
+    lockfile_path,
+    library_path = .libPaths())
 }
 
 #' @export
 #' @family comparisons
 #' @describeIn compare_lockfile compares the renv libray to the lockfile
 compare_capsule_to_lockfile <- function(lockfile_path = "./renv.lock") {
-  compare_lib_lockfile(lockfile_path, library_path = renv::paths$library())
+  compare_lib_lockfile(
+    lockfile_path,
+    library_path = locate_capsule()
+  )
+
 }
 
+#' @param library_path a character vector of library paths to search
 compare_lib_lockfile <- function(
   lockfile_path = "./renv.lock",
-  library_path = NULL
+  library_path = .libPaths()
 ) {
   lockfile_deps <- get_lockfile_deps(lockfile_path)
 
@@ -188,6 +198,7 @@ get_lockfile_deps <- function(lockfile_path) {
   lockfile_deps
 }
 
+#' @param library_path a character vector of library paths to search
 get_library_deps <- function(dep_list, library_path = NULL) {
   local_deps <-
     lapply_df(
@@ -225,32 +236,6 @@ dependency_data_frame <- function(dep_data) {
     remote_sha = ifelse(is_real_sha(dep_data$RemoteSha), dep_data$RemoteSha, NA),
     remote_repo = dep_data$RemoteRepo %||% NA,
     remote_username = dep_data$RemoteUsername %||% NA
-  )
-
-}
-
-# dev stuff
-function() {
-  dep_source_paths <- "../interactive_location_analytics/packages.R"
-  lockfile_path <- "../interactive_location_analytics/renv.lock"
-
-  behind <- get_pkg_behind_lockfile(lockfile_path)
-
-  any_local_behind_lockfile(lockfile_path, dep_source_paths)
-
-  withr::with_dir(
-    "../interactive_location_analytics",
-    compare_local_to_lockfile()
-  )
-
-  withr::with_dir(
-    "../interactive_location_analytics",
-    compare_capsule_to_lockfile()
-  )
-
-  withr::with_dir(
-    "../interactive_location_analytics",
-    any_local_behind_lockfile()
   )
 
 }
