@@ -1,0 +1,306 @@
+{
+  "R": {
+    "Version": "4.4.1",
+    "Repositories": [
+      {
+        "Name": "CRAN",
+        "URL": "https://mirror.aarnet.edu.au/pub/CRAN"
+      }
+    ]
+  },
+  "Packages": {
+    "bit64": {
+      "Source": "Repository",
+      "Package": "bit64",
+      "Version": "4.6.0-1",
+      "Repository": "CRAN"
+    },
+    "bit": {
+      "Source": "Repository",
+      "Package": "bit",
+      "Version": "4.5.0.1",
+      "Repository": "CRAN"
+    },
+    "cli": {
+      "Source": "Repository",
+      "Package": "cli",
+      "Version": "3.6.4",
+      "Repository": "CRAN"
+    },
+    "clipr": {
+      "Source": "Repository",
+      "Package": "clipr",
+      "Version": "0.8.0",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "clipr",
+      "RemoteRef": "clipr",
+      "RemoteRepos": "https://mirror.aarnet.edu.au/pub/CRAN",
+      "RemotePkgPlatform": "source",
+      "RemoteSha": "0.8.0"
+    },
+    "cpp11": {
+      "Source": "Repository",
+      "Package": "cpp11",
+      "Version": "0.5.2",
+      "Repository": "CRAN"
+    },
+    "crayon": {
+      "Source": "Repository",
+      "Package": "crayon",
+      "Version": "1.5.3",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "crayon",
+      "RemoteRef": "crayon",
+      "RemoteRepos": "https://mirror.aarnet.edu.au/pub/CRAN",
+      "RemotePkgPlatform": "source",
+      "RemoteSha": "1.5.3"
+    },
+    "fansi": {
+      "Source": "Repository",
+      "Package": "fansi",
+      "Version": "1.0.6",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "fansi",
+      "RemoteRef": "fansi",
+      "RemoteRepos": "https://mirror.aarnet.edu.au/pub/CRAN",
+      "RemotePkgPlatform": "source",
+      "RemoteSha": "1.0.6"
+    },
+    "glue": {
+      "Source": "Repository",
+      "Package": "glue",
+      "Version": "1.8.0",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "glue",
+      "RemoteRef": "glue",
+      "RemoteRepos": "https://mirror.aarnet.edu.au/pub/CRAN",
+      "RemotePkgPlatform": "source",
+      "RemoteSha": "1.8.0"
+    },
+    "hms": {
+      "Source": "Repository",
+      "Package": "hms",
+      "Version": "1.1.3",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "hms",
+      "RemoteRef": "hms",
+      "RemoteRepos": "https://mirror.aarnet.edu.au/pub/CRAN",
+      "RemotePkgPlatform": "source",
+      "RemoteSha": "1.1.3"
+    },
+    "lifecycle": {
+      "Source": "Repository",
+      "Package": "lifecycle",
+      "Version": "1.0.4",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "lifecycle",
+      "RemoteRef": "lifecycle",
+      "RemoteRepos": "https://mirror.aarnet.edu.au/pub/CRAN",
+      "RemotePkgPlatform": "source",
+      "RemoteSha": "1.0.4"
+    },
+    "magrittr": {
+      "Source": "Repository",
+      "Package": "magrittr",
+      "Version": "2.0.3",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "magrittr",
+      "RemoteRef": "magrittr",
+      "RemoteRepos": "https://mirror.aarnet.edu.au/pub/CRAN",
+      "RemotePkgPlatform": "source",
+      "RemoteSha": "2.0.3"
+    },
+    "pillar": {
+      "Source": "Repository",
+      "Package": "pillar",
+      "Version": "1.10.1",
+      "Repository": "CRAN"
+    },
+    "pkgconfig": {
+      "Source": "Repository",
+      "Package": "pkgconfig",
+      "Version": "2.0.3",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "pkgconfig",
+      "RemoteRef": "pkgconfig",
+      "RemoteRepos": "https://mirror.aarnet.edu.au/pub/CRAN",
+      "RemotePkgPlatform": "source",
+      "RemoteSha": "2.0.3"
+    },
+    "prettyunits": {
+      "Source": "Repository",
+      "Package": "prettyunits",
+      "Version": "1.2.0",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "prettyunits",
+      "RemoteRef": "prettyunits",
+      "RemoteRepos": "https://mirror.aarnet.edu.au/pub/CRAN",
+      "RemotePkgPlatform": "source",
+      "RemoteSha": "1.2.0"
+    },
+    "progress": {
+      "Source": "Repository",
+      "Package": "progress",
+      "Version": "1.2.3",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "progress",
+      "RemoteRef": "progress",
+      "RemoteRepos": "https://mirror.aarnet.edu.au/pub/CRAN",
+      "RemotePkgPlatform": "source",
+      "RemoteSha": "1.2.3"
+    },
+    "R6": {
+      "Source": "Repository",
+      "Package": "R6",
+      "Version": "2.6.1",
+      "Repository": "CRAN"
+    },
+    "readr": {
+      "Source": "Repository",
+      "Package": "readr",
+      "Version": "2.1.5",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "readr",
+      "RemoteRef": "readr",
+      "RemoteRepos": "https://mirror.aarnet.edu.au/pub/CRAN",
+      "RemotePkgPlatform": "source",
+      "RemoteSha": "2.1.5"
+    },
+    "rlang": {
+      "Source": "Repository",
+      "Package": "rlang",
+      "Version": "1.1.5",
+      "Repository": "CRAN"
+    },
+    "rstudioapi": {
+      "Source": "Repository",
+      "Package": "rstudioapi",
+      "Version": "0.17.1",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "rstudioapi",
+      "RemoteRef": "rstudioapi",
+      "RemoteRepos": "https://mirror.aarnet.edu.au/pub/CRAN",
+      "RemoteReposName": "CRAN",
+      "RemotePkgPlatform": "source",
+      "RemoteSha": "0.17.1"
+    },
+    "testrpkg2": {
+      "Source": "GitHub",
+      "Package": "testrpkg2",
+      "Version": "1.0.0",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "testrpkg2",
+      "RemoteUsername": "milesmcbain",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "ec0d23a8dc1307aaf64034d17ac0ba3021be2df3"
+    },
+    "testrpkg": {
+      "Source": "GitHub",
+      "Package": "testrpkg",
+      "Version": "1.0.1",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "testrpkg",
+      "RemoteUsername": "milesmcbain",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "1768f22be009ae0411abcdfe732d17d874002530"
+    },
+    "tibble": {
+      "Source": "Repository",
+      "Package": "tibble",
+      "Version": "3.2.1",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "tibble",
+      "RemoteRef": "tibble",
+      "RemoteRepos": "https://mirror.aarnet.edu.au/pub/CRAN",
+      "RemotePkgPlatform": "source",
+      "RemoteSha": "3.2.1"
+    },
+    "tidyselect": {
+      "Source": "Repository",
+      "Package": "tidyselect",
+      "Version": "1.2.1",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "tidyselect",
+      "RemoteRef": "tidyselect",
+      "RemoteRepos": "https://mirror.aarnet.edu.au/pub/CRAN",
+      "RemotePkgPlatform": "source",
+      "RemoteSha": "1.2.1"
+    },
+    "tzdb": {
+      "Source": "Repository",
+      "Package": "tzdb",
+      "Version": "0.4.0",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "tzdb",
+      "RemoteRef": "tzdb",
+      "RemoteRepos": "https://mirror.aarnet.edu.au/pub/CRAN",
+      "RemotePkgPlatform": "source",
+      "RemoteSha": "0.4.0"
+    },
+    "utf8": {
+      "Source": "Repository",
+      "Package": "utf8",
+      "Version": "1.2.4",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "utf8",
+      "RemoteRef": "utf8",
+      "RemoteRepos": "https://mirror.aarnet.edu.au/pub/CRAN",
+      "RemotePkgPlatform": "source",
+      "RemoteSha": "1.2.4"
+    },
+    "vctrs": {
+      "Source": "Repository",
+      "Package": "vctrs",
+      "Version": "0.6.5",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "vctrs",
+      "RemoteRef": "vctrs",
+      "RemoteRepos": "https://mirror.aarnet.edu.au/pub/CRAN",
+      "RemotePkgPlatform": "source",
+      "RemoteSha": "0.6.5"
+    },
+    "vroom": {
+      "Source": "Repository",
+      "Package": "vroom",
+      "Version": "1.6.5",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "vroom",
+      "RemoteRef": "vroom",
+      "RemoteRepos": "https://mirror.aarnet.edu.au/pub/CRAN",
+      "RemotePkgPlatform": "source",
+      "RemoteSha": "1.6.5"
+    },
+    "withr": {
+      "Source": "Repository",
+      "Package": "withr",
+      "Version": "3.0.2",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "withr",
+      "RemoteRef": "withr",
+      "RemoteRepos": "https://mirror.aarnet.edu.au/pub/CRAN",
+      "RemotePkgPlatform": "source",
+      "RemoteSha": "3.0.2"
+    }
+  }
+}

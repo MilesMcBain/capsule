@@ -29,7 +29,6 @@ Remotes:
 RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)
 Suggests:
-    testthat (>= 3.0.0),
-    pak
+    testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Copyright: 2022 Miles McBain, unless noted. Some MIT licensed code taken from RStudio bears Copyright in comments.
