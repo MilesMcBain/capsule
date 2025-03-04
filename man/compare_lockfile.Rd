@@ -21,9 +21,9 @@ versions in the local R library (.libPaths()) or capsule library (./renv).
 }
 \section{Functions}{
 \itemize{
-\item \code{compare_capsule_to_lockfile}: compares the renv libray to the lockfile
-}}
+\item \code{compare_capsule_to_lockfile()}: compares the renv libray to the lockfile
 
+}}
 \seealso{
 Other comparisons: 
 \code{\link{any_local_behind_lockfile}()},

@@ -8,6 +8,8 @@ create(dep_source_paths = "./packages.R", lockfile_path = "./renv.lock")
 }
 \arguments{
 \item{dep_source_paths}{files to find package dependencies in.}
+
+\item{lockfile_path}{The path to the lockfile to produce capsule library for. Default is \code{./renv.lock}.}
 }
 \value{
 nothing. Creates a capsule as a side effect.

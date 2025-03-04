@@ -4,10 +4,12 @@
 \alias{run_session}
 \title{run_session}
 \usage{
-run_session(code)
+run_session(code, lockfile_path = "./renv.lock")
 }
 \arguments{
 \item{code}{an expression to run in the context of the capsule library.}
+
+\item{lockfile_path}{the path to lockfile for the capsule library. Default is \code{./renv.lock}.}
 }
 \value{
 output of \code{code}

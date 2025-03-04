@@ -38,7 +38,7 @@ test_that("create and run works", {
         ) %>%
       fs::path_split() %>%
       unlist() %>%
-      head(-1) %>% # drop .renv
+      utils::head(-1) %>% # drop .renv
       fs::path_join() %>%
       as.character()
 

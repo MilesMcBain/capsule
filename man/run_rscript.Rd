@@ -4,7 +4,7 @@
 \alias{run_rscript}
 \title{Run an R script in a new process in the capsule}
 \usage{
-run_rscript(path, ..., show = TRUE)
+run_rscript(path, ..., lockfile_path = "./renv.lock", show = TRUE)
 }
 \arguments{
 \item{path}{The path to the R script}
@@ -60,10 +60,9 @@ with a non-zero status code. By default no error is thrown.}
 assuming they are active in the parent process.}
   }}
 
-\item{show}{Logical, whether to show the standard output on the screen
-while the child process is running. Note that this is independent
-of the \code{stdout} and \code{stderr} arguments. The standard
-error is not shown currently.}
+\item{lockfile_path}{the path to lockfile for the capsule library. Default is \code{./renv.lock}.}
+
+\item{show}{Whether to show standard output in console.}
 }
 \value{
 Invisibly returns the result of \code{\link[callr:rscript]{callr::rscript()}}

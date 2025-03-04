@@ -8,6 +8,7 @@
 ##' @title reproduce_lib
 ##' @return nothing.
 ##' @author Miles McBain
+##' @param lockfile_path The path to the lockfile to produce library for. Default is `./renv.lock`.
 ##' @export
 reproduce_lib <- function(lockfile_path = "./renv.lock") {
 

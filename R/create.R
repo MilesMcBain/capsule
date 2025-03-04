@@ -5,9 +5,10 @@
 ##' file that contains all library() calls - hence this makes an explicit
 ##' assertion of your dependencies. This way spurious usages of pkg:: for
 ##' packages not stated as dependencies will cause errors that can be caught.
-##' 
+##'
 ##' @title create
 ##' @param dep_source_paths files to find package dependencies in.
+##' @param lockfile_path The path to the lockfile to produce capsule library for. Default is `./renv.lock`.
 ##' @return nothing. Creates a capsule as a side effect.
 ##' @author Miles McBain
 ##' @export

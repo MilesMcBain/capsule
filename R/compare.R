@@ -17,6 +17,7 @@
 #'     package dependencies from. If NULL (default) the whole local library is compared.
 #' @param lockfile_path a length one character vector path of the lockfile for
 #      the capsule.
+#' @param library_path the source libary to compare versions from.
 #'
 #' @return a summary dataframe of package version differences.
 #' @examples

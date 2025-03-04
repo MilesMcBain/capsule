@@ -5,15 +5,19 @@
 \alias{run}
 \title{run functions in the capsule}
 \usage{
-run_callr(func, show = TRUE, ...)
+run_callr(func, show = TRUE, ..., lockfile_path = "./renv.lock")
 
-run(code)
+run(code, lockfile_path = "./renv.lock")
 }
 \arguments{
 \item{func}{a function to run in the capsule context, as per the
 \code{\link[callr:r]{callr::r()}} interface.}
 
+\item{show}{Whether to show standard output in console.}
+
 \item{...}{additional arguments passed to \code{callr::r()}}
+
+\item{lockfile_path}{the path to lockfile for the capsule library. Default is \code{./renv.lock}.}
 
 \item{code}{the body of function to be run in the
 capsule context. See Details.}

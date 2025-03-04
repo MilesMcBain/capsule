@@ -4,7 +4,10 @@
 \alias{reproduce_lib}
 \title{reproduce_lib}
 \usage{
-reproduce_lib()
+reproduce_lib(lockfile_path = "./renv.lock")
+}
+\arguments{
+\item{lockfile_path}{The path to the lockfile to produce library for. Default is \code{./renv.lock}.}
 }
 \value{
 nothing.

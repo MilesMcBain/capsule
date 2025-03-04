@@ -7,7 +7,8 @@
 \usage{
 get_local_behind_lockfile(
   lockfile_path = "./renv.lock",
-  dep_source_paths = NULL
+  dep_source_paths = NULL,
+  library_path = .libPaths()
 )
 
 get_capsule_behind_lockfile(
@@ -20,6 +21,8 @@ get_capsule_behind_lockfile(
 
 \item{dep_source_paths}{a character vector of file paths to extract
 package dependencies from. If NULL (default) the whole local library is compared.}
+
+\item{library_path}{the source libary to compare versions from.}
 }
 \value{
 a summary dataframe of package version differences.
@@ -41,9 +44,9 @@ same version but different SHAs.
 }
 \section{Functions}{
 \itemize{
-\item \code{get_capsule_behind_lockfile}: get packages in the renv library that are behind the lockfile
-}}
+\item \code{get_capsule_behind_lockfile()}: get packages in the renv library that are behind the lockfile
 
+}}
 \examples{
 \dontrun{
 get_local_behind_capsule(

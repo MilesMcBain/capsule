@@ -7,6 +7,7 @@
 dev_mirror_lockfile(
   lockfile_path = "./renv.lock",
   dep_source_paths = NULL,
+  library_path = .libPaths(),
   prompt = interactive()
 )
 }
@@ -14,6 +15,8 @@ dev_mirror_lockfile(
 \item{lockfile_path}{lockfile to be compared to local environment.}
 
 \item{dep_source_paths}{R files to search for dependencies, the set of packages to be updated is limited to these dependencies (and their dependencies).}
+
+\item{library_path}{the source libary to compare versions from, and install into.}
 
 \item{prompt}{ask for confirmation after displaying list to be installed and before isntalling?}
 }

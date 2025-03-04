@@ -4,12 +4,19 @@
 \alias{whinge}
 \title{Complain if the local R library has packages that are behind the lockfile versions}
 \usage{
-whinge(whinge_fun = warning, lockfile_path = "./renv.lock")
+whinge(
+  whinge_fun = warning,
+  lockfile_path = "./renv.lock",
+  dep_source_paths = NULL
+)
 }
 \arguments{
 \item{whinge_fun}{the function to use to have a whinge about packages, e.g. message, warning, stop, etc.}
 
 \item{lockfile_path}{the path to the project lockfile}
+
+\item{dep_source_paths}{to search for dependencies to comparage versions for. E.g. "packages.R"
+If NULL the whole local library is compared}
 }
 \value{
 output of whinge_fun, most likely nothing.

@@ -10,6 +10,7 @@
 #'
 #' @param lockfile_path lockfile to be compared to local environment.
 #' @param dep_source_paths R files to search for dependencies, the set of packages to be updated is limited to these dependencies (and their dependencies).
+#' @param library_path the source libary to compare versions from, and install into.
 #' @param prompt ask for confirmation after displaying list to be installed and before isntalling?
 #'
 #' @return names of the packages updated or to be updated (if install did not proceed) invisibly.

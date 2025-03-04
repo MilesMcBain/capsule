@@ -39,6 +39,6 @@ be integrated into automated pipelines that build projects or documents.
 }
 \section{Functions}{
 \itemize{
-\item \code{capshot_str}: a variation that returns lockfile json as a character vector for further use.
-}}
+\item \code{capshot_str()}: a variation that returns lockfile json as a character vector for further use.
 
+}}
