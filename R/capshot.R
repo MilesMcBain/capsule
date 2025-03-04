@@ -1,40 +1,23 @@
 globalVariables("BASE_PACKAGES")
 
 BASE_PACKAGES <-
-  c("class",
-  "coxme",
-  "KernSmooth",
-  "MASS",
-  "base",
-  "boot",
-  "class",
-  "cluster",
-  "codetools",
-  "compiler",
-  "datasets",
-  "foreign",
-  "graphics",
-  "grDevices",
-  "grid",
-  "KernSmooth",
-  "lattice",
-  "MASS",
-  "Matrix",
-  "methods",
-  "mgcv",
-  "nlme",
-  "nnet",
-  "parallel",
-  "rpart",
-  "spatial",
-  "splines",
-  "stats",
-  "stats4",
-  "survival",
-  "tcltk",
-  "tools",
-  "utils")
-
+  c(
+    "base",
+    "compiler",
+    "datasets",
+    "grDevices",
+    "graphics",
+    "grid",
+    "methods",
+    "parallel",
+    "splines",
+    "stats",
+    "stats4",
+    "tcltk",
+    "tools",
+    "translations",
+    "utils"
+  )
 #' Quickly generate an renv compliant lock file
 #'
 #' These functions generate json lockfiles that can be restored from using
@@ -104,9 +87,8 @@ get_project_dcfs <- function(declared_deps, pkg_names, pkg_dcfs) {
     current_deps <- new_current_deps
   }
   missing <- setdiff(names(project_deps), unlist(pkg_names))
-  if (length(missing)) stop("Cannot complete capshot(). Project dependencies not installed locally: ", 
-  paste(missing, collapse = ", "), "\n\n",
-  "Use dev_mirror_lockfile() to bring the local library up to at least the lockfile versions for all dependencies."
+  if (length(missing)) stop("Cannot complete capshot(). Project dependencies not installed locally: ",
+  paste(missing, collapse = ", "), "\n",
   )
   stats::setNames(pkg_dcfs, pkg_names)[unlist(project_deps)]
 }
