@@ -87,9 +87,13 @@ get_project_dcfs <- function(declared_deps, pkg_names, pkg_dcfs) {
     current_deps <- new_current_deps
   }
   missing <- setdiff(names(project_deps), unlist(pkg_names))
-  if (length(missing)) stop("Cannot complete capshot(). Project dependencies not installed locally: ",
-  paste(missing, collapse = ", "), "\n",
-  )
+  if (length(missing)) {
+    stop(
+      "Cannot complete capshot(). Project dependencies not installed locally: ",
+      paste(missing, collapse = ", "),
+      "\n"
+    )
+  }
   stats::setNames(pkg_dcfs, pkg_names)[unlist(project_deps)]
 }
 
@@ -156,7 +160,7 @@ get_renv_fields <- function(dcf_record) {
   } else {
     dcf_record_df$Source <- "unknown"
     warning(
-      paste0("{", dcf_record_df$Package,"}", " has unknown source. Installed via {devtools} locally?. Install from remote to document source in lockfile."),
+      paste0("{", dcf_record_df$Package, "}", " has unknown source. Installed via {devtools} locally?. Install from remote to document source in lockfile."),
       call. = FALSE
     )
   }
@@ -203,4 +207,3 @@ function() {
   dummy <- c("Remotes", "RemoteSha", "RemoteUsername", "RemotePkgRef")
   grepl("^Remote(?!s$)", dummy, perl = TRUE)
 }
-
